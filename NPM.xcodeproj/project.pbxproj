@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		43EDD7BF2E4ED5BC00CD23B3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 43EDD7BE2E4ED5BC00CD23B3 /* Alamofire */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		43EDD7542E4D963E00CD23B3 /* NPM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NPM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43EDD7BF2E4ED5BC00CD23B3 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = NPM;
 			packageProductDependencies = (
+				43EDD7BE2E4ED5BC00CD23B3 /* Alamofire */,
 			);
 			productName = NPM;
 			productReference = 43EDD7542E4D963E00CD23B3 /* NPM.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 43EDD74B2E4D963E00CD23B3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				43EDD7BD2E4ED5BC00CD23B3 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 43EDD7552E4D963E00CD23B3 /* Products */;
 			projectDirPath = "";
@@ -185,6 +194,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -242,6 +252,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -256,6 +267,7 @@
 				DEVELOPMENT_TEAM = B72LWYT2SZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "This app needs to discover and connect to devices on your local network.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -284,6 +296,7 @@
 				DEVELOPMENT_TEAM = B72LWYT2SZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "This app needs to discover and connect to devices on your local network.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -324,6 +337,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		43EDD7BD2E4ED5BC00CD23B3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		43EDD7BE2E4ED5BC00CD23B3 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 43EDD7BD2E4ED5BC00CD23B3 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 43EDD74C2E4D963E00CD23B3 /* Project object */;
 }

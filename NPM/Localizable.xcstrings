@@ -1,0 +1,229 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "%@://%@:%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@://%2$@:%3$@"
+          }
+        }
+      }
+    },
+    "%lld DOMAINS" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Domains"
+          }
+        }
+      }
+    },
+    "404_HOSTS" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "404 Hosts"
+          }
+        }
+      }
+    },
+    "ACCESS_LISTS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Access Lists"
+          }
+        }
+      }
+    },
+    "CERTIFICATIONS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certifications"
+          }
+        }
+      }
+    },
+    "DASHBOARD" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard"
+          }
+        }
+      }
+    },
+    "ERROR_CONNECTING_TO_SERVER" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to connect to server, please check your credentials!"
+          }
+        }
+      }
+    },
+    "Hello, World!" : {
+
+    },
+    "HTTP_ONLY" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTTP only"
+          }
+        }
+      }
+    },
+    "INSTANCE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instance"
+          }
+        }
+      }
+    },
+    "letsencrypt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let's Encrypt"
+          }
+        }
+      }
+    },
+    "NO_DOMAINS" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Domains"
+          }
+        }
+      }
+    },
+    "PASSWORD" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
+          }
+        }
+      }
+    },
+    "PROXY" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proxy"
+          }
+        }
+      }
+    },
+    "PROXY_HOSTS" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proxy Hosts"
+          }
+        }
+      }
+    },
+    "REDIRECTION" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redirection"
+          }
+        }
+      }
+    },
+    "REDIRECTION_HOSTS" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redirection Hosts"
+          }
+        }
+      }
+    },
+    "SAVE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        }
+      }
+    },
+    "SERVER_URL" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server URL"
+          }
+        }
+      }
+    },
+    "SETTINGS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "STREAMS" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streams"
+          }
+        }
+      }
+    },
+    "USERNAME" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Username"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
