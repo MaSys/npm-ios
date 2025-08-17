@@ -14,10 +14,17 @@ class AppService: ObservableObject {
     @AppStorage("npm_server_url") var pangolinServerUrl: String = ""
     
     @Published var certs: [Cert] = []
+    @Published var proxies: [Proxy] = []
     
     public func fetchCerts() {
         CertsRequest.fetch { success, records in
             self.certs = records
+        }
+    }
+    
+    public func fetchProxies() {
+        ProxiesRequest.fetch { success, records in
+            self.proxies = records
         }
     }
 }

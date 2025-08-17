@@ -34,6 +34,7 @@ struct InstanceView: View {
                         .textContentType(.URL)
                         .textInputAutocapitalization(.none)
                         .autocapitalization(.none)
+                        .autocorrectionDisabled()
                 }
                 
                 HStack {
@@ -42,6 +43,7 @@ struct InstanceView: View {
                         .multilineTextAlignment(.trailing)
                         .textInputAutocapitalization(.none)
                         .autocapitalization(.none)
+                        .autocorrectionDisabled()
                 }
                 
                 HStack {

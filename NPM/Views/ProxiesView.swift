@@ -10,29 +10,32 @@ import SwiftUI
 struct ProxiesView: View {
     
     @EnvironmentObject var appService: AppService
-    
-    @State private var proxies: [Proxy] = []
-    
+        
     var body: some View {
         NavigationStack {
             List {
-                ForEach(proxies, id: \.id) { proxy in
+                ForEach(self.appService.proxies, id: \.id) { proxy in
                     NavigationLink {
                         EmptyView()
                     } label: {
                         ProxyRowView(proxy: proxy)
                     }
                 }
+            }//List
+            .navigationTitle("PROXY_HOSTS")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        ProxiesCreateView()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+
+                }
             }
-        }
+        }//NavStack
         .onAppear {
-            self.fetch()
-        }
-    }
-    
-    private func fetch() {
-        ProxiesRequest.fetch { success, records in
-            self.proxies = records
+            self.appService.fetchProxies()
         }
     }
 }

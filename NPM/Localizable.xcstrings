@@ -15,7 +15,7 @@
       }
     },
     "%lld DOMAINS" : {
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -46,6 +46,16 @@
         }
       }
     },
+    "ADD" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add"
+          }
+        }
+      }
+    },
     "CERTIFICATIONS" : {
       "localizations" : {
         "en" : {
@@ -66,6 +76,16 @@
         }
       }
     },
+    "DOMAIN_NAMES" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domain Names"
+          }
+        }
+      }
+    },
     "ERROR_CONNECTING_TO_SERVER" : {
       "localizations" : {
         "en" : {
@@ -76,7 +96,30 @@
         }
       }
     },
+    "FORWARD_HOST" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forward Hostname / IP"
+          }
+        }
+      }
+    },
+    "FORWARD_PORT" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forward Port"
+          }
+        }
+      }
+    },
     "Hello, World!" : {
+
+    },
+    "http" : {
 
     },
     "HTTP_ONLY" : {
@@ -88,6 +131,9 @@
           }
         }
       }
+    },
+    "https" : {
+
     },
     "INSTANCE" : {
       "localizations" : {
@@ -106,17 +152,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Let's Encrypt"
-          }
-        }
-      }
-    },
-    "NO_DOMAINS" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Domains"
           }
         }
       }
@@ -179,6 +214,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save"
+          }
+        }
+      }
+    },
+    "SCHEMA" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schema"
           }
         }
       }
