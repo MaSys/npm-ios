@@ -22,7 +22,7 @@ struct ContentView: View {
             ProxiesView()
                 .environmentObject(appService)
                 .tabItem {
-                    Label("PROXY", systemImage: "bolt.horizontal")
+                    Label("PROXY", systemImage: "bolt.fill")
                 }
             
             RedirectionsView()
@@ -40,6 +40,7 @@ struct ContentView: View {
         }
         .onAppear {
             self.appService.fetchCerts()
+            self.appService.fetchAccessLists()
         }
     }
 }

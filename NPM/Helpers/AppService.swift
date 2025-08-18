@@ -15,6 +15,7 @@ class AppService: ObservableObject {
     
     @Published var certs: [Cert] = []
     @Published var proxies: [Proxy] = []
+    @Published var accessLists: [AccessList] = []
     
     public func fetchCerts() {
         CertsRequest.fetch { success, records in
@@ -25,6 +26,12 @@ class AppService: ObservableObject {
     public func fetchProxies() {
         ProxiesRequest.fetch { success, records in
             self.proxies = records
+        }
+    }
+    
+    public func fetchAccessLists() {
+        AccessListsRequest.fetch { success, records in
+            self.accessLists = records
         }
     }
 }

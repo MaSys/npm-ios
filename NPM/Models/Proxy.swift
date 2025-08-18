@@ -34,6 +34,10 @@ struct Proxy: Decodable {
     var locations: [String]?
     var hsts_enabled: Bool
     var hsts_subdomains: Bool
+    
+    var host: String {
+        return "\(forward_scheme)://\(forward_host):\(forward_port)"
+    }
 }
 
 extension Proxy {

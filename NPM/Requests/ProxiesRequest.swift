@@ -49,11 +49,9 @@ class ProxiesRequest {
               let auth_data = userDefaults.data(forKey: "npm_auth") else
         {
             completionHandler(false, nil)
-            print("no data")
             return
         }
         guard let auth = try? JSONDecoder().decode(Auth.self, from: auth_data) else {
-            print("no auth")
             return
         }
         
@@ -69,7 +67,6 @@ class ProxiesRequest {
         AF.request(url,method: .post, parameters: params, encoding: encoding, headers: ["Authorization": token])
             .printError()
             .responseDecodable(of: Proxy.self) { response in
-                print(response)
                 switch response.result {
                 case .success(let record):
                     completionHandler(true, record)

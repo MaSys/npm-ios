@@ -19,14 +19,14 @@ struct DashboardView: View {
                     HStack {
                         DashboardCardView(
                             text: "PROXY_HOSTS",
-                            icon: "bolt.horizontal",
+                            icon: "bolt",
                             value: "\(report.proxy)",
                             color: .green,
                             width: squareSize
                         )
                         DashboardCardView(
                             text: "REDIRECTION_HOSTS",
-                            icon: "bolt.horizontal",
+                            icon: "arrow.trianglehead.branch",
                             value: "\(report.redirection)",
                             color: .yellow,
                             width: squareSize
@@ -36,14 +36,14 @@ struct DashboardView: View {
                     HStack {
                         DashboardCardView(
                             text: "STREAMS",
-                            icon: "bolt.horizontal",
+                            icon: "dot.radiowaves.left.and.right",
                             value: "\(report.stream)",
                             color: .blue,
                             width: squareSize
                         )
                         DashboardCardView(
                             text: "404_HOSTS",
-                            icon: "bolt.horizontal",
+                            icon: "bolt.slash",
                             value: "\(report.dead)",
                             color: .red,
                             width: squareSize

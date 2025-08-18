@@ -88,8 +88,8 @@ struct InstanceView: View {
         self.npmUsername = self.username
         self.npmPassword = self.password
         
-        AuthRequest.login { success, auth in
-            if success && auth != nil {
+        AuthRequest.login { success in
+            if success {
                 self.dismiss()
             } else {
                 self.connectionError = true

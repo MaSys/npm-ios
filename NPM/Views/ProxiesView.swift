@@ -10,13 +10,13 @@ import SwiftUI
 struct ProxiesView: View {
     
     @EnvironmentObject var appService: AppService
-        
+
     var body: some View {
         NavigationStack {
             List {
                 ForEach(self.appService.proxies, id: \.id) { proxy in
                     NavigationLink {
-                        EmptyView()
+                        ProxyView(proxy: proxy)
                     } label: {
                         ProxyRowView(proxy: proxy)
                     }

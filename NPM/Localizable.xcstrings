@@ -36,6 +36,16 @@
         }
       }
     },
+    "ACCESS_LIST" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Access List"
+          }
+        }
+      }
+    },
     "ACCESS_LISTS" : {
       "localizations" : {
         "en" : {
@@ -52,6 +62,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Add"
+          }
+        }
+      }
+    },
+    "BLOCK_COMMON_EXPLOITS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Block Common Exploits"
+          }
+        }
+      }
+    },
+    "CACHE_ASSETS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cache Assets"
           }
         }
       }
@@ -119,6 +149,16 @@
     "Hello, World!" : {
 
     },
+    "HOST" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Host"
+          }
+        }
+      }
+    },
     "http" : {
 
     },
@@ -156,6 +196,16 @@
         }
       }
     },
+    "LOCATIONS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locations"
+          }
+        }
+      }
+    },
     "PASSWORD" : {
       "localizations" : {
         "en" : {
@@ -183,6 +233,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Proxy Hosts"
+          }
+        }
+      }
+    },
+    "PUBLICLY_ACCESSIBLE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicly Accessible"
           }
         }
       }
@@ -248,6 +309,9 @@
         }
       }
     },
+    "SSL" : {
+
+    },
     "STREAMS" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -265,6 +329,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Username"
+          }
+        }
+      }
+    },
+    "WEBSOCKETS_SUPPORT" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Websockets Support"
           }
         }
       }
