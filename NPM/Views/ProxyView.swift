@@ -27,6 +27,12 @@ struct ProxyView: View {
         return "PUBLICLY_ACCESSIBLE"
     }
     
+    var cert: Cert? {
+        return self.appService.certs.first { c in
+            c.id == self.proxy.certificate_id
+        }
+    }
+    
     var body: some View {
         List {
             hostSection
@@ -39,7 +45,7 @@ struct ProxyView: View {
             
             Section {
                 NavigationLink {
-                    EmptyView()
+                    ProxyAccessListView(proxy: self.proxy)
                 } label: {
                     HStack {
                         Text("ACCESS_LIST")
@@ -50,15 +56,22 @@ struct ProxyView: View {
                 }//HStack
                 
                 NavigationLink {
-                    EmptyView()
+                    ProxyLocationsView(proxy: self.proxy)
                 } label: {
                     Text("LOCATIONS")
                 }//HStack
                 
                 NavigationLink {
-                    EmptyView()
+                    ProxySSLView(proxy: self.proxy)
                 } label: {
-                    Text("SSL")
+                    HStack {
+                        Text("SSL")
+                        Spacer()
+                        if cert != nil {
+                            Text(cert!.nice_name)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
                 }//HStack
             }
         }
@@ -104,16 +117,23 @@ extension ProxyView {
                         Image(systemName: "circle.fill")
                             .resizable()
                             .frame(width: 7, height: 7)
-                        Text(domain)
+//                        Text("[\(domain)](\(fullDomain(from: domain)))")
+                        Link(domain, destination: fullDomain(from: domain))
                     }
                     .padding(.leading, 2)
                 }
-            }
+                .padding(.leading)
+            }//VStack
         }//Section
     }//hostSection
     
+    private func fullDomain(from domain: String) -> URL {
+        let schema = self.proxy.certificate_id == 0 ? "http" : "https"
+        return URL(string: "\(schema)://\(domain)")!
+    }
 }
 
 #Preview {
     ProxyView(proxy: Proxy.fake())
+        .environmentObject(AppService.shared)
 }

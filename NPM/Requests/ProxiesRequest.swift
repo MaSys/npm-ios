@@ -46,8 +46,7 @@ class ProxiesRequest {
     ) {
         let userDefaults = UserDefaults.standard
         guard let baseUrl = userDefaults.string(forKey: "npm_server_url"),
-              let auth_data = userDefaults.data(forKey: "npm_auth") else
-        {
+              let auth_data = userDefaults.data(forKey: "npm_auth") else {
             completionHandler(false, nil)
             return
         }
@@ -65,7 +64,6 @@ class ProxiesRequest {
             "forward_port": port
         ]
         AF.request(url,method: .post, parameters: params, encoding: encoding, headers: ["Authorization": token])
-            .printError()
             .responseDecodable(of: Proxy.self) { response in
                 switch response.result {
                 case .success(let record):
@@ -73,6 +71,39 @@ class ProxiesRequest {
                 case .failure(let error):
                     print(error.localizedDescription)
                     completionHandler(false, nil)
+                }
+            }
+    }
+    
+    public static func updateSSL(
+        id: Int,
+        cert_id: Int,
+        completionHandler: @escaping (_ success: Bool) -> Void
+    ) {
+        let userDefaults = UserDefaults.standard
+        guard let baseUrl = userDefaults.string(forKey: "npm_server_url"),
+              let auth_data = userDefaults.data(forKey: "npm_auth") else {
+            completionHandler(false)
+            return
+        }
+        guard let auth = try? JSONDecoder().decode(Auth.self, from: auth_data) else {
+            return
+        }
+        
+        let url = URL(string: "\(baseUrl)/api/nginx/proxy-hosts/\(id)")!
+        let token = "Bearer \(auth.token)"
+        let encoding = JSONEncoding.default
+        let params: [String: Any] = ["certificate_id": cert_id]
+        AF.request(url, method: .put, parameters: params, encoding: encoding, headers: ["Authorization": token])
+            .printError()
+            .responseDecodable(of: Proxy.self) { response in
+                print(response)
+                switch response.result {
+                case .success(let record):
+                    completionHandler(true)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(false)
                 }
             }
     }
