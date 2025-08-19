@@ -78,6 +78,10 @@ class ProxiesRequest {
     public static func updateSSL(
         id: Int,
         cert_id: Int,
+        forceSSL: Bool,
+        httpSupport: Bool,
+        hsts: Bool,
+        hstsSubdomains: Bool,
         completionHandler: @escaping (_ success: Bool) -> Void
     ) {
         let userDefaults = UserDefaults.standard
@@ -93,7 +97,13 @@ class ProxiesRequest {
         let url = URL(string: "\(baseUrl)/api/nginx/proxy-hosts/\(id)")!
         let token = "Bearer \(auth.token)"
         let encoding = JSONEncoding.default
-        let params: [String: Any] = ["certificate_id": cert_id]
+        let params: [String: Any] = [
+            "certificate_id": cert_id,
+            "ssl_forced": forceSSL,
+            "hsts_enabled": hsts,
+            "hsts_subdomains": hstsSubdomains,
+            "http2_support": httpSupport
+        ]
         AF.request(url, method: .put, parameters: params, encoding: encoding, headers: ["Authorization": token])
             .responseDecodable(of: Proxy.self) { response in
                 switch response.result {

@@ -138,6 +138,16 @@
         }
       }
     },
+    "FORCE_SSL" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Force SSL"
+          }
+        }
+      }
+    },
     "FORWARD_HOST" : {
       "localizations" : {
         "en" : {
@@ -171,6 +181,26 @@
         }
       }
     },
+    "HSTS_ENABLED" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HSTS Enabled"
+          }
+        }
+      }
+    },
+    "HSTS_SUBDOMAINS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HSTS Subdomains"
+          }
+        }
+      }
+    },
     "http" : {
 
     },
@@ -180,6 +210,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "HTTP only"
+          }
+        }
+      }
+    },
+    "HTTP_SUPPORT" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTTP/2 Support"
           }
         }
       }

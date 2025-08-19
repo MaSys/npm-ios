@@ -16,45 +16,68 @@ struct ProxySSLView: View {
     
     @State private var selectedCert: Int = 0
     
+    @State private var forceSSL: Bool = false
+    @State private var httpSupport: Bool = false
+    @State private var hsts: Bool = false
+    @State private var hstsSubdomains: Bool = false
+    
     var body: some View {
-        List {
-            Button {
-                self.selectedCert = 0
-            } label: {
-                HStack {
-                    Text("NONE")
-                    Spacer()
-                    if self.selectedCert == 0 {
-                        Image(systemName: "checkmark")
-                            .foregroundStyle(Color.accentColor)
-                    }
-                }
-            }//Button
-            .tint(.primary)
+        Form {
+            Section {
+                Toggle("FORCE_SSL", isOn: $forceSSL)
+                Toggle("HTTP_SUPPORT", isOn: $httpSupport)
+                Toggle("HSTS_ENABLED", isOn: $hsts)
+                Toggle("HSTS_SUBDOMAINS", isOn: $hstsSubdomains)
+            }
+            .disabled(self.selectedCert == 0)
             
-            ForEach(self.appService.certs, id: \.id) { cert in
+            List {
                 Button {
-                    self.selectedCert = cert.id
+                    self.selectedCert = 0
+                    self.forceSSL = false
+                    self.httpSupport = false
+                    self.hsts = false
+                    self.hstsSubdomains = false
                 } label: {
                     HStack {
-                        VStack(alignment: .leading) {
-                            Text(cert.nice_name)
-                            Text(LocalizedStringResource(stringLiteral: cert.provider))
-                                .foregroundStyle(.secondary)
-                                .font(.system(size: 14))
-                        }
+                        Text("NONE")
                         Spacer()
-                        if cert.id == self.selectedCert {
+                        if self.selectedCert == 0 {
                             Image(systemName: "checkmark")
                                 .foregroundStyle(Color.accentColor)
                         }
                     }
                 }//Button
                 .tint(.primary)
-            }
-        }//List
+                
+                ForEach(self.appService.certs, id: \.id) { cert in
+                    Button {
+                        self.selectedCert = cert.id
+                    } label: {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(cert.nice_name)
+                                Text(LocalizedStringResource(stringLiteral: cert.provider))
+                                    .foregroundStyle(.secondary)
+                                    .font(.system(size: 14))
+                            }
+                            Spacer()
+                            if cert.id == self.selectedCert {
+                                Image(systemName: "checkmark")
+                                    .foregroundStyle(Color.accentColor)
+                            }
+                        }
+                    }//Button
+                    .tint(.primary)
+                }
+            }//List
+        }//vstack
         .onAppear {
             self.selectedCert = self.proxy.certificate_id
+            self.forceSSL = self.proxy.ssl_forced
+            self.httpSupport = self.proxy.http2_support
+            self.hsts = self.proxy.hsts_enabled
+            self.hstsSubdomains = self.proxy.hsts_subdomains
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -68,7 +91,14 @@ struct ProxySSLView: View {
     }
     
     private func save() {
-        ProxiesRequest.updateSSL(id: self.proxy.id, cert_id: self.selectedCert) { success in
+        ProxiesRequest.updateSSL(
+            id: self.proxy.id,
+            cert_id: self.selectedCert,
+            forceSSL: self.forceSSL,
+            httpSupport: self.httpSupport,
+            hsts: self.hsts,
+            hstsSubdomains: self.hstsSubdomains
+        ) { success in
             if success {
                 self.appService.fetchProxies()
                 self.dismiss()
