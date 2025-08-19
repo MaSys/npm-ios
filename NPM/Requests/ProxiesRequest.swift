@@ -136,4 +136,35 @@ class ProxiesRequest {
                 }
             }
     }
+    
+    public static func updateLocations(
+        id: Int,
+        locations: [Location],
+        completionHandler: @escaping (_ success: Bool) -> Void
+    ) {
+        let userDefaults = UserDefaults.standard
+        guard let baseUrl = userDefaults.string(forKey: "npm_server_url"),
+              let auth_data = userDefaults.data(forKey: "npm_auth") else {
+            completionHandler(false)
+            return
+        }
+        guard let auth = try? JSONDecoder().decode(Auth.self, from: auth_data) else {
+            return
+        }
+        
+        let url = URL(string: "\(baseUrl)/api/nginx/proxy-hosts/\(id)")!
+        let token = "Bearer \(auth.token)"
+        AF.request(url, method: .put, parameters: ["locations": locations], encoder: JSONParameterEncoder.default, headers: ["Authorization": token])
+            .printError()
+            .responseDecodable(of: Proxy.self) { response in
+                print(response)
+                switch response.result {
+                case .success(_):
+                    completionHandler(true)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(false)
+                }
+            }
+    }
 }

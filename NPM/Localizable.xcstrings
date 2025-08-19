@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "/path" : {
+
+    },
     "%@://%@:%@" : {
       "localizations" : {
         "en" : {
@@ -24,6 +27,12 @@
           }
         }
       }
+    },
+    "80" : {
+
+    },
+    "203.0.113.25/path/" : {
+
     },
     "404_HOSTS" : {
       "extractionState" : "manual",
@@ -199,6 +208,16 @@
         }
       }
     },
+    "LOCATION" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location"
+          }
+        }
+      }
+    },
     "LOCATIONS" : {
       "localizations" : {
         "en" : {
@@ -225,6 +244,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Password"
+          }
+        }
+      }
+    },
+    "PATH" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Path"
           }
         }
       }
@@ -298,6 +328,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schema"
+          }
+        }
+      }
+    },
+    "SCHEME" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scheme"
           }
         }
       }

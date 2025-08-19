@@ -31,7 +31,7 @@ struct Proxy: Decodable {
     var http2_support: Bool
     var forward_scheme: String
     var enabled: Bool
-    var locations: [String]?
+    var locations: [Location]?
     var hsts_enabled: Bool
     var hsts_subdomains: Bool
     

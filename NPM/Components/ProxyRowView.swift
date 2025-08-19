@@ -22,7 +22,7 @@ struct ProxyRowView: View {
     var body: some View {
         VStack {
             HStack {
-                StatusIconView(online: proxy.enabled)
+                StatusIconView(proxy: proxy)
                 
                 VStack(alignment: .leading) {
                     ForEach(proxy.domain_names, id: \.self) { domain in

@@ -5,10 +5,10 @@
 //  Created by Yaser Almasri on 17/08/25.
 //
 
-struct AccessListMeta: Decodable, Encodable {
+struct AccessListMeta: Decodable {
 }
 
-struct AccessList: Decodable, Encodable {
+struct AccessList: Decodable {
     var id: Int
     var created_on: String
     var modified_on: String
