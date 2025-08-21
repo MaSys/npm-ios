@@ -44,6 +44,7 @@ struct ProxyEditView: View {
                     TextField("FORWARD_HOST", text: $host)
                         .autocapitalization(.none)
                         .autocorrectionDisabled()
+                        .keyboardType(.URL)
                 }//HStack
                 HStack {
                     Text("FORWARD_PORT")

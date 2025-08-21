@@ -40,11 +40,12 @@ struct RedirectionsCreateView: View {
                 .pickerStyle(.segmented)
                 
                 VStack(alignment: .leading) {
-                    Text("FORWARD_HOST")
+                    Text("FORWARD_DOMAIN")
                         .fontWeight(.bold)
                     TextField("FORWARD_DOMAIN", text: $forwardDomain)
                         .autocapitalization(.none)
                         .autocorrectionDisabled()
+                        .keyboardType(.URL)
                 }//HStack
                 
                 Picker("HTTP_CODE", selection: $httpCode) {

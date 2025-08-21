@@ -110,13 +110,6 @@ struct ProxyView: View {
 extension ProxyView {
     var hostSection: some View {
         Section {
-            HStack {
-                Text("HOST")
-                    .fontWeight(.bold)
-                Spacer()
-                Text(self.proxy.host)
-            }
-            
             VStack(alignment: .leading) {
                 Text("DOMAIN_NAMES")
                     .fontWeight(.bold)
@@ -131,6 +124,13 @@ extension ProxyView {
                 }
                 .padding(.leading)
             }//VStack
+            
+            HStack {
+                Text("HOST")
+                    .fontWeight(.bold)
+                Spacer()
+                Text(self.proxy.host)
+            }
         }//Section
     }//hostSection
     
