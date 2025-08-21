@@ -34,6 +34,24 @@
     "203.0.113.25/path/" : {
 
     },
+    "300 Multiple choices" : {
+
+    },
+    "301 Moved permanently" : {
+
+    },
+    "302 Found" : {
+
+    },
+    "303 See other" : {
+
+    },
+    "307 Temporary redirect" : {
+
+    },
+    "308 Permanent redirect" : {
+
+    },
     "404_HOSTS" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -115,6 +133,9 @@
         }
       }
     },
+    "DOMAIN" : {
+
+    },
     "DOMAIN_LINK_%@" : {
       "extractionState" : "manual"
     },
@@ -148,6 +169,16 @@
         }
       }
     },
+    "FORWARD_DOMAIN" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forward Domain"
+          }
+        }
+      }
+    },
     "FORWARD_HOST" : {
       "localizations" : {
         "en" : {
@@ -167,9 +198,6 @@
           }
         }
       }
-    },
-    "Hello, World!" : {
-
     },
     "HOST" : {
       "localizations" : {
@@ -203,6 +231,16 @@
     },
     "http" : {
 
+    },
+    "HTTP_CODE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTTP Code"
+          }
+        }
+      }
     },
     "HTTP_ONLY" : {
       "localizations" : {
@@ -288,13 +326,12 @@
         }
       }
     },
-    "PATH" : {
-      "extractionState" : "stale",
+    "PRESERVE_PATH" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Path"
+            "value" : "Preserve Path"
           }
         }
       }
@@ -351,6 +388,9 @@
           }
         }
       }
+    },
+    "REDIRECTIONS" : {
+
     },
     "SAVE" : {
       "localizations" : {

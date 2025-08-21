@@ -17,8 +17,10 @@ struct ProxiesView: View {
                 ForEach(self.appService.proxies, id: \.id) { proxy in
                     NavigationLink {
                         ProxyView(proxy: proxy)
+                            .environmentObject(AppService.shared)
                     } label: {
                         ProxyRowView(proxy: proxy)
+                            .environmentObject(AppService.shared)
                     }
                 }
             }//List
@@ -27,6 +29,7 @@ struct ProxiesView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
                         ProxiesCreateView()
+                            .environmentObject(AppService.shared)
                     } label: {
                         Image(systemName: "plus")
                     }

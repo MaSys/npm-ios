@@ -46,6 +46,7 @@ struct ProxyView: View {
             Section {
                 NavigationLink {
                     ProxyAccessListView(proxy: self.proxy)
+                        .environmentObject(AppService.shared)
                 } label: {
                     HStack {
                         Text("ACCESS_LIST")
@@ -57,12 +58,14 @@ struct ProxyView: View {
                 
                 NavigationLink {
                     ProxyLocationsView(proxy: self.proxy)
+                        .environmentObject(AppService.shared)
                 } label: {
                     Text("LOCATIONS")
                 }//HStack
                 
                 NavigationLink {
                     ProxySSLView(proxy: self.proxy)
+                        .environmentObject(AppService.shared)
                 } label: {
                     HStack {
                         Text("SSL")
@@ -117,7 +120,6 @@ extension ProxyView {
                         Image(systemName: "circle.fill")
                             .resizable()
                             .frame(width: 7, height: 7)
-//                        Text("[\(domain)](\(fullDomain(from: domain)))")
                         Link(domain, destination: fullDomain(from: domain))
                     }
                     .padding(.leading, 2)

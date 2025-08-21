@@ -19,7 +19,10 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 Section(header: Text("")) {
-                    NavigationLink(destination: InstanceView()) {
+                    NavigationLink {
+                        InstanceView()
+                            .environmentObject(AppService.shared)
+                    } label: {
                         VStack(alignment: .leading) {
                             Text("INSTANCE")
                             if !self.npmServerUrl.isEmpty {

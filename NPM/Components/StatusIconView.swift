@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct StatusIconView: View {
+struct StatusIconView<T: Host>: View {
     
-    var proxy: Proxy
+    var host: T
     
     var color: Color {
-        if self.proxy.meta.nginx_online == false {
+        if self.host.meta.nginx_online == false {
             return .red
-        } else if self.proxy.enabled == false {
+        } else if self.host.enabled == false {
             return .yellow
         } else {
             return .green
@@ -30,5 +30,5 @@ struct StatusIconView: View {
 }
 
 #Preview {
-    StatusIconView(proxy: Proxy.fake())
+    StatusIconView(host: Proxy.fake())
 }

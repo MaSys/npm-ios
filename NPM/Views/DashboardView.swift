@@ -24,6 +24,7 @@ struct DashboardView: View {
                             color: .green,
                             width: squareSize
                         )
+                        .environmentObject(AppService.shared)
                         DashboardCardView(
                             text: "REDIRECTION_HOSTS",
                             icon: "arrow.trianglehead.branch",
@@ -31,6 +32,7 @@ struct DashboardView: View {
                             color: .yellow,
                             width: squareSize
                         )
+                        .environmentObject(AppService.shared)
                     }
                     
                     HStack {
@@ -41,6 +43,7 @@ struct DashboardView: View {
                             color: .blue,
                             width: squareSize
                         )
+                        .environmentObject(AppService.shared)
                         DashboardCardView(
                             text: "404_HOSTS",
                             icon: "bolt.slash",
@@ -48,6 +51,7 @@ struct DashboardView: View {
                             color: .red,
                             width: squareSize
                         )
+                        .environmentObject(AppService.shared)
                     }
                     Spacer()
                 }

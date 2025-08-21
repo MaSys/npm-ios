@@ -1,31 +1,31 @@
 //
-//  ProxyRowView.swift
+//  RedirectionRowView.swift
 //  NPM
 //
-//  Created by Yaser Almasri on 14/08/25.
+//  Created by Yaser Almasri on 19/08/25.
 //
 
 import SwiftUI
 
-struct ProxyRowView: View {
+struct RedirectionRowView: View {
     
     @EnvironmentObject var appService: AppService
     
-    var proxy: Proxy
+    var redirection: Redirection
     
     var cert: Cert? {
         return self.appService.certs.first { c in
-            c.id == self.proxy.certificate_id
+            c.id == self.redirection.certificate_id
         }
     }
     
     var body: some View {
         VStack {
             HStack {
-                StatusIconView(host: proxy)
+                StatusIconView(host: self.redirection)
                 
                 VStack(alignment: .leading) {
-                    ForEach(proxy.domain_names, id: \.self) { domain in
+                    ForEach(redirection.domain_names, id: \.self) { domain in
                         Text(domain)
                             .fontWeight(.bold)
                             .font(.system(size: 16))
@@ -36,7 +36,7 @@ struct ProxyRowView: View {
             }
             
             HStack {
-                Text("\(proxy.forward_scheme)://\(proxy.forward_host):\(String(proxy.forward_port))")
+                Text(self.redirection.forward_domain_name)
                     .font(.system(size: 14))
                     .foregroundStyle(.gray)
                 
@@ -58,5 +58,5 @@ struct ProxyRowView: View {
 }
 
 #Preview {
-    ProxyRowView(proxy: Proxy.fake())
+    RedirectionRowView(redirection: Redirection.fake())
 }

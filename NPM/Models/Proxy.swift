@@ -5,14 +5,7 @@
 //  Created by Yaser Almasri on 14/08/25.
 //
 
-struct ProxyMeta: Decodable {
-    var letsencrypt_agree: Bool?
-    var dns_challenge: Bool?
-    var nginx_online: Bool?
-    var nginx_err: String?
-}
-
-struct Proxy: Decodable {
+struct Proxy: Host, Decodable {
     var id: Int
     var created_on: String
     var modified_on: String
@@ -26,7 +19,7 @@ struct Proxy: Decodable {
     var caching_enabled: Bool
     var block_exploits: Bool
     var advanced_config: String
-    var meta: ProxyMeta
+    var meta: Meta
     var allow_websocket_upgrade: Bool
     var http2_support: Bool
     var forward_scheme: String
@@ -58,7 +51,7 @@ extension Proxy {
             caching_enabled: false,
             block_exploits: false,
             advanced_config: "",
-            meta: ProxyMeta(
+            meta: Meta(
                 letsencrypt_agree: false,
                 dns_challenge: false,
                 nginx_online: true,

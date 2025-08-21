@@ -8,11 +8,40 @@
 import SwiftUI
 
 struct RedirectionsView: View {
+    
+    @EnvironmentObject var appService: AppService
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List {
+                ForEach(self.appService.redirections, id: \.id) { redirection in
+                    NavigationLink {
+                        EmptyView()
+                    } label: {
+                        RedirectionRowView(redirection: redirection)
+                            .environmentObject(AppService.shared)
+                    }
+                }
+            }
+            .navigationTitle("REDIRECTIONS")
+            .onAppear {
+                self.appService.fetchRedirections()
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        RedirectionsCreateView()
+                            .environmentObject(self.appService)
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+        }
     }
 }
 
 #Preview {
     RedirectionsView()
+        .environmentObject(AppService.shared)
 }
