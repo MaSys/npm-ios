@@ -64,7 +64,7 @@ struct ProxyView: View {
                 }//HStack
                 
                 NavigationLink {
-                    ProxySSLView(proxy: self.proxy)
+                    SSLPickerView(host: self.proxy)
                         .environmentObject(AppService.shared)
                 } label: {
                     HStack {

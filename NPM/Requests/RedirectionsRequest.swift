@@ -37,6 +37,42 @@ class RedirectionsRequest {
             }
     }
     
+    // TODO: Toggle is not permitted/implemented in the API
+    public static func toggle(
+        id: Int,
+        enabled: Bool,
+        completionHandler: @escaping (_ success: Bool) -> Void
+    ) {
+        let userDefaults = UserDefaults.standard
+        guard let baseUrl = userDefaults.string(forKey: "npm_server_url"),
+              let auth_data = userDefaults.data(forKey: "npm_auth") else {
+            completionHandler(false)
+            return
+        }
+        guard let auth = try? JSONDecoder().decode(Auth.self, from: auth_data) else {
+            return
+        }
+        
+        let url = URL(string: "\(baseUrl)/api/nginx/redirection-hosts/\(id)")!
+        let token = "Bearer \(auth.token)"
+        let encoding = JSONEncoding.default
+        let params: [String: Any] = [
+            "enabled": enabled
+        ]
+        AF.request(url, method: .put, parameters: params, encoding: encoding, headers: ["Authorization": token])
+            .printError()
+            .responseDecodable(of: Redirection.self) { response in
+                print(response)
+                switch response.result {
+                case .success(_):
+                    completionHandler(true)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(false)
+                }
+            }
+    }
+    
     public static func create(
         scheme: String,
         forwardDomain: String,
@@ -77,6 +113,47 @@ class RedirectionsRequest {
                 case .failure(let error):
                     print(error.localizedDescription)
                     completionHandler(false, nil)
+                }
+            }
+    }
+    
+    public static func updateSSL(
+        id: Int,
+        cert_id: Int,
+        forceSSL: Bool,
+        httpSupport: Bool,
+        hsts: Bool,
+        hstsSubdomains: Bool,
+        completionHandler: @escaping (_ success: Bool) -> Void
+    ) {
+        let userDefaults = UserDefaults.standard
+        guard let baseUrl = userDefaults.string(forKey: "npm_server_url"),
+              let auth_data = userDefaults.data(forKey: "npm_auth") else {
+            completionHandler(false)
+            return
+        }
+        guard let auth = try? JSONDecoder().decode(Auth.self, from: auth_data) else {
+            return
+        }
+        
+        let url = URL(string: "\(baseUrl)/api/nginx/redirection-hosts/\(id)")!
+        let token = "Bearer \(auth.token)"
+        let encoding = JSONEncoding.default
+        let params: [String: Any] = [
+            "certificate_id": cert_id,
+            "ssl_forced": forceSSL,
+            "hsts_enabled": hsts,
+            "hsts_subdomains": hstsSubdomains,
+            "http2_support": httpSupport
+        ]
+        AF.request(url, method: .put, parameters: params, encoding: encoding, headers: ["Authorization": token])
+            .responseDecodable(of: Redirection.self) { response in
+                switch response.result {
+                case .success(_):
+                    completionHandler(true)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(false)
                 }
             }
     }

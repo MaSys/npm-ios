@@ -16,7 +16,8 @@ struct RedirectionsView: View {
             List {
                 ForEach(self.appService.redirections, id: \.id) { redirection in
                     NavigationLink {
-                        EmptyView()
+                        RedirectionView(redirection: redirection)
+                            .environmentObject(AppService.shared)
                     } label: {
                         RedirectionRowView(redirection: redirection)
                             .environmentObject(AppService.shared)

@@ -6,6 +6,12 @@
 //
 
 protocol Host {
+    var id: Int { get }
     var meta: Meta { get }
     var enabled: Bool { get }
+    var certificate_id: Int { get }
+    var ssl_forced: Bool { get }
+    var http2_support: Bool { get }
+    var hsts_enabled: Bool { get }
+    var hsts_subdomains: Bool { get }
 }

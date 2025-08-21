@@ -1,18 +1,18 @@
 //
-//  ProxySSLView.swift
+//  SSLPickerView.swift
 //  NPM
 //
-//  Created by Yaser Almasri on 18/08/25.
+//  Created by Yaser Almasri on 20/08/25.
 //
 
 import SwiftUI
 
-struct ProxySSLView: View {
+struct SSLPickerView<T: Host>: View {
     
     @EnvironmentObject var appService: AppService
     @Environment(\.dismiss) var dismiss
-
-    var proxy: Proxy
+    
+    var host: T
     
     @State private var selectedCert: Int = 0
     
@@ -73,11 +73,11 @@ struct ProxySSLView: View {
             }//List
         }//vstack
         .onAppear {
-            self.selectedCert = self.proxy.certificate_id
-            self.forceSSL = self.proxy.ssl_forced
-            self.httpSupport = self.proxy.http2_support
-            self.hsts = self.proxy.hsts_enabled
-            self.hstsSubdomains = self.proxy.hsts_subdomains
+            self.selectedCert = self.host.certificate_id
+            self.forceSSL = self.host.ssl_forced
+            self.httpSupport = self.host.http2_support
+            self.hsts = self.host.hsts_enabled
+            self.hstsSubdomains = self.host.hsts_subdomains
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -91,23 +91,38 @@ struct ProxySSLView: View {
     }
     
     private func save() {
-        ProxiesRequest.updateSSL(
-            id: self.proxy.id,
-            cert_id: self.selectedCert,
-            forceSSL: self.forceSSL,
-            httpSupport: self.httpSupport,
-            hsts: self.hsts,
-            hstsSubdomains: self.hstsSubdomains
-        ) { success in
-            if success {
-                self.appService.fetchProxies()
-                self.dismiss()
+        if self.host is Proxy {
+            ProxiesRequest.updateSSL(
+                id: self.host.id,
+                cert_id: self.selectedCert,
+                forceSSL: self.forceSSL,
+                httpSupport: self.httpSupport,
+                hsts: self.hsts,
+                hstsSubdomains: self.hstsSubdomains
+            ) { success in
+                if success {
+                    self.appService.fetchProxies()
+                    self.dismiss()
+                }
+            }
+        } else if self.host is Redirection {
+            RedirectionsRequest.updateSSL(
+                id: self.host.id,
+                cert_id: self.selectedCert,
+                forceSSL: self.forceSSL,
+                httpSupport: self.httpSupport,
+                hsts: self.hsts,
+                hstsSubdomains: self.hstsSubdomains
+            ) { success in
+                if success {
+                    self.appService.fetchRedirections()
+                    self.dismiss()
+                }
             }
         }
     }
 }
 
 #Preview {
-    ProxySSLView(proxy: Proxy.fake())
-        .environmentObject(AppService.shared)
+    SSLPickerView(host: Proxy.fake())
 }
