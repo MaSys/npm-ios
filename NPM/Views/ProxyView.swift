@@ -89,7 +89,11 @@ struct ProxyView: View {
                     })
                     
                     Button {
-                        
+                        ProxiesRequest.toggle(id: self.proxy.id, enabled: !self.proxy.enabled) { success in
+                            if success {
+                                self.appService.fetchProxies()
+                            }
+                        }
                     } label: {
                         Image(systemName: self.proxy.enabled ? "power.circle.fill" : "power.circle")
                             .resizable()

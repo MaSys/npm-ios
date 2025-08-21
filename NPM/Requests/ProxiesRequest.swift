@@ -37,6 +37,39 @@ class ProxiesRequest {
             }
     }
     
+    public static func toggle(
+        id: Int,
+        enabled: Bool,
+        completionHandler: @escaping (_ success: Bool) -> Void
+    ) {
+        let userDefaults = UserDefaults.standard
+        guard let baseUrl = userDefaults.string(forKey: "npm_server_url"),
+              let auth_data = userDefaults.data(forKey: "npm_auth") else {
+            completionHandler(false)
+            return
+        }
+        guard let auth = try? JSONDecoder().decode(Auth.self, from: auth_data) else {
+            return
+        }
+        
+        let url = URL(string: "\(baseUrl)/api/nginx/proxy-hosts/\(id)")!
+        let token = "Bearer \(auth.token)"
+        let encoding = JSONEncoding.default
+        let params: [String: Any] = [
+            "enabled": enabled
+        ]
+        AF.request(url, method: .put, parameters: params, encoding: encoding, headers: ["Authorization": token])
+            .responseDecodable(of: Proxy.self) { response in
+                switch response.result {
+                case .success(_):
+                    completionHandler(true)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(false)
+                }
+            }
+    }
+    
     public static func create(
         schema: String,
         host: String,
