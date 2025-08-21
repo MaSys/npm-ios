@@ -144,7 +144,14 @@
       }
     },
     "DOMAIN" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domain"
+          }
+        }
+      }
     },
     "DOMAIN_LINK_%@" : {
       "extractionState" : "manual"
@@ -316,6 +323,9 @@
         }
       }
     },
+    "my.domain.local" : {
+
+    },
     "NONE" : {
       "localizations" : {
         "en" : {
@@ -400,7 +410,14 @@
       }
     },
     "REDIRECTIONS" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redirections"
+          }
+        }
+      }
     },
     "SAVE" : {
       "localizations" : {
@@ -408,16 +425,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save"
-          }
-        }
-      }
-    },
-    "SCHEMA" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schema"
           }
         }
       }

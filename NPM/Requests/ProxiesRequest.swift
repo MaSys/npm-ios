@@ -71,7 +71,7 @@ class ProxiesRequest {
     }
     
     public static func create(
-        schema: String,
+        scheme: String,
         host: String,
         port: Int,
         domains: [String],
@@ -92,11 +92,50 @@ class ProxiesRequest {
         let encoding = JSONEncoding.default
         let params: [String: Any] = [
             "domain_names": domains,
-            "forward_scheme": schema,
+            "forward_scheme": scheme,
             "forward_host": host,
             "forward_port": port
         ]
         AF.request(url,method: .post, parameters: params, encoding: encoding, headers: ["Authorization": token])
+            .responseDecodable(of: Proxy.self) { response in
+                switch response.result {
+                case .success(let record):
+                    completionHandler(true, record)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(false, nil)
+                }
+            }
+    }
+    
+    public static func update(
+        id: Int,
+        scheme: String,
+        host: String,
+        port: Int,
+        domains: [String],
+        completionHandler: @escaping (_ success: Bool, _ record: Proxy?) -> Void
+    ) {
+        let userDefaults = UserDefaults.standard
+        guard let baseUrl = userDefaults.string(forKey: "npm_server_url"),
+              let auth_data = userDefaults.data(forKey: "npm_auth") else {
+            completionHandler(false, nil)
+            return
+        }
+        guard let auth = try? JSONDecoder().decode(Auth.self, from: auth_data) else {
+            return
+        }
+        
+        let url = URL(string: "\(baseUrl)/api/nginx/proxy-hosts/\(id)")!
+        let token = "Bearer \(auth.token)"
+        let encoding = JSONEncoding.default
+        let params: [String: Any] = [
+            "domain_names": domains,
+            "forward_scheme": scheme,
+            "forward_host": host,
+            "forward_port": port
+        ]
+        AF.request(url,method: .put, parameters: params, encoding: encoding, headers: ["Authorization": token])
             .responseDecodable(of: Proxy.self) { response in
                 switch response.result {
                 case .success(let record):

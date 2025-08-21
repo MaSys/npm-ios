@@ -83,7 +83,8 @@ struct ProxyView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 HStack {
                     NavigationLink(destination: {
-                        EmptyView()
+                        ProxyEditView(proxy: self.proxy)
+                            .environmentObject(self.appService)
                     }, label: {
                         Image(systemName: "square.and.pencil")
                     })
@@ -134,8 +135,8 @@ extension ProxyView {
     }//hostSection
     
     private func fullDomain(from domain: String) -> URL {
-        let schema = self.proxy.certificate_id == 0 ? "http" : "https"
-        return URL(string: "\(schema)://\(domain)")!
+        let scheme = self.proxy.certificate_id == 0 ? "http" : "https"
+        return URL(string: "\(scheme)://\(domain)")!
     }
 }
 

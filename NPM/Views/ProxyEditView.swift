@@ -1,13 +1,15 @@
 //
-//  ProxiesCreateView.swift
+//  ProxyEditView.swift
 //  NPM
 //
-//  Created by Yaser Almasri on 16/08/25.
+//  Created by Yaser Almasri on 20/08/25.
 //
 
 import SwiftUI
 
-struct ProxiesCreateView: View {
+struct ProxyEditView: View {
+    
+    var proxy: Proxy
     
     @EnvironmentObject var appService: AppService
     @Environment(\.dismiss) var dismiss
@@ -80,6 +82,12 @@ struct ProxiesCreateView: View {
                 }
             }//Section
         }
+        .onAppear {
+            self.domains = self.proxy.domain_names
+            self.scheme = self.proxy.forward_scheme
+            self.host = self.proxy.forward_host
+            self.port = String(self.proxy.forward_port)
+        }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("SAVE") {
@@ -91,11 +99,10 @@ struct ProxiesCreateView: View {
     }
     
     private func save() {
-        if self.host.isEmpty || self.port.isEmpty || self.domains.count == 0 {
-            return
-        }
+        if !self.validForm { return }
         
-        ProxiesRequest.create(
+        ProxiesRequest.update(
+            id: self.proxy.id,
             scheme: self.scheme,
             host: self.host,
             port: Int(self.port)!,
@@ -110,5 +117,5 @@ struct ProxiesCreateView: View {
 }
 
 #Preview {
-    ProxiesCreateView()
+    ProxyEditView(proxy: Proxy.fake())
 }

@@ -41,6 +41,7 @@ struct RedirectionsCreateView: View {
                 
                 VStack(alignment: .leading) {
                     Text("FORWARD_HOST")
+                        .fontWeight(.bold)
                     TextField("FORWARD_DOMAIN", text: $forwardDomain)
                         .autocapitalization(.none)
                         .autocorrectionDisabled()
@@ -68,6 +69,7 @@ struct RedirectionsCreateView: View {
             Section {
                 HStack {
                     Text("DOMAIN_NAMES")
+                        .fontWeight(.bold)
                     TextField("DOMAIN", text: $domain)
                         .multilineTextAlignment(.trailing)
                         .autocapitalization(.none)
