@@ -53,6 +53,11 @@ struct ProxyView: View {
             
             deleteButton
         }
+        .onAppear {
+            self.cacheAssets = self.proxy.caching_enabled
+            self.blockCommonExploits = self.proxy.block_exploits
+            self.websocketsSupport = self.proxy.allow_websocket_upgrade
+        }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -104,8 +109,23 @@ extension ProxyView {
     var configSection: some View {
         Section {
             Toggle("CACHE_ASSETS", isOn: $cacheAssets)
+                .onChange(of: cacheAssets) { oldVal, newVal in
+                    ProxiesRequest.updateCacheAssets(id: self.proxy.id, cacheAssets: self.cacheAssets) { success in
+                        if success { self.appService.fetchProxies() }
+                    }
+                }
             Toggle("BLOCK_COMMON_EXPLOITS", isOn: $blockCommonExploits)
+                .onChange(of: blockCommonExploits) { oldVal, newVal in
+                    ProxiesRequest.updateBlockCommonExploits(id: self.proxy.id, blockCommonExploits: self.blockCommonExploits) { success in
+                        if success { self.appService.fetchProxies() }
+                    }
+                }
             Toggle("WEBSOCKETS_SUPPORT", isOn: $websocketsSupport)
+                .onChange(of: websocketsSupport) { oldVal, newVal in
+                    ProxiesRequest.updateWebsocketsSupport(id: self.proxy.id, websocketsSupport: self.websocketsSupport) { success in
+                        if success { self.appService.fetchProxies() }
+                    }
+                }
         }//section
     }
     

@@ -237,9 +237,7 @@ class ProxiesRequest {
         let url = URL(string: "\(baseUrl)/api/nginx/proxy-hosts/\(id)")!
         let token = "Bearer \(auth.token)"
         AF.request(url, method: .put, parameters: ["locations": locations], encoder: JSONParameterEncoder.default, headers: ["Authorization": token])
-            .printError()
             .responseDecodable(of: Proxy.self) { response in
-                print(response)
                 switch response.result {
                 case .success(_):
                     completionHandler(true)
@@ -268,6 +266,93 @@ class ProxiesRequest {
         let token = "Bearer \(auth.token)"
         AF.request(url, method: .delete, headers: ["Authorization": token])
             .response { response in
+                switch response.result {
+                case .success(_):
+                    completionHandler(true)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(false)
+                }
+            }
+    }
+    
+    public static func updateCacheAssets(
+        id: Int,
+        cacheAssets: Bool,
+        completionHandler: @escaping (_ success: Bool) -> Void
+    ) {
+        let userDefaults = UserDefaults.standard
+        guard let baseUrl = userDefaults.string(forKey: "npm_server_url"),
+              let auth_data = userDefaults.data(forKey: "npm_auth") else {
+            completionHandler(false)
+            return
+        }
+        guard let auth = try? JSONDecoder().decode(Auth.self, from: auth_data) else {
+            return
+        }
+        
+        let url = URL(string: "\(baseUrl)/api/nginx/proxy-hosts/\(id)")!
+        let token = "Bearer \(auth.token)"
+        AF.request(url, method: .put, parameters: ["caching_enabled": cacheAssets], encoder: JSONParameterEncoder.default, headers: ["Authorization": token])
+            .responseDecodable(of: Proxy.self) { response in
+                switch response.result {
+                case .success(_):
+                    completionHandler(true)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(false)
+                }
+            }
+    }
+    
+    public static func updateBlockCommonExploits(
+        id: Int,
+        blockCommonExploits: Bool,
+        completionHandler: @escaping (_ success: Bool) -> Void
+    ) {
+        let userDefaults = UserDefaults.standard
+        guard let baseUrl = userDefaults.string(forKey: "npm_server_url"),
+              let auth_data = userDefaults.data(forKey: "npm_auth") else {
+            completionHandler(false)
+            return
+        }
+        guard let auth = try? JSONDecoder().decode(Auth.self, from: auth_data) else {
+            return
+        }
+        
+        let url = URL(string: "\(baseUrl)/api/nginx/proxy-hosts/\(id)")!
+        let token = "Bearer \(auth.token)"
+        AF.request(url, method: .put, parameters: ["block_exploits": blockCommonExploits], encoder: JSONParameterEncoder.default, headers: ["Authorization": token])
+            .responseDecodable(of: Proxy.self) { response in
+                switch response.result {
+                case .success(_):
+                    completionHandler(true)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(false)
+                }
+            }
+    }
+    
+    public static func updateWebsocketsSupport(
+        id: Int,
+        websocketsSupport: Bool,
+        completionHandler: @escaping (_ success: Bool) -> Void
+    ) {
+        let userDefaults = UserDefaults.standard
+        guard let baseUrl = userDefaults.string(forKey: "npm_server_url"),
+              let auth_data = userDefaults.data(forKey: "npm_auth") else {
+            completionHandler(false)
+            return
+        }
+        guard let auth = try? JSONDecoder().decode(Auth.self, from: auth_data) else {
+            return
+        }
+        
+        let url = URL(string: "\(baseUrl)/api/nginx/proxy-hosts/\(id)")!
+        let token = "Bearer \(auth.token)"
+        AF.request(url, method: .put, parameters: ["allow_websocket_upgrade": websocketsSupport], encoder: JSONParameterEncoder.default, headers: ["Authorization": token])
+            .responseDecodable(of: Proxy.self) { response in
                 switch response.result {
                 case .success(_):
                     completionHandler(true)

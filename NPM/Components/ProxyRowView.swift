@@ -34,9 +34,14 @@ struct ProxyRowView: View {
                                 .cornerRadius(4)
                         }
                     }
-                    Text("\(proxy.forward_scheme)://\(proxy.forward_host):\(String(proxy.forward_port))")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+                    
+                    HStack {
+                        Image(systemName: "arrow.turn.down.right")
+                            .imageScale(.small)
+                        Text("\(proxy.forward_scheme)://\(proxy.forward_host):\(String(proxy.forward_port))")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
                 }
                 Spacer()
                 StatusIconView(host: proxy)

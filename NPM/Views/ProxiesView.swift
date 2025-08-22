@@ -29,6 +29,7 @@ struct ProxiesView: View {
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle("PROXY_HOSTS")
+            .refreshable(action: { self.appService.fetchProxies() })
             .onAppear {
                 self.appService.fetchProxies()
             }

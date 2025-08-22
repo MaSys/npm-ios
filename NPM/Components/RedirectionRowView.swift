@@ -34,9 +34,13 @@ struct RedirectionRowView: View {
                                 .cornerRadius(4)
                         }
                     }
-                    Text(self.redirection.forward_domain_name)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+                    HStack {
+                        Image(systemName: "arrow.turn.down.right")
+                            .imageScale(.small)
+                        Text(self.redirection.forward_domain_name)
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
                 }
                 Spacer()
                 StatusIconView(host: redirection)
