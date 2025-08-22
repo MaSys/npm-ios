@@ -20,40 +20,42 @@ struct RedirectionRowView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 8) {
             HStack {
-                StatusIconView(host: self.redirection)
-                
-                VStack(alignment: .leading) {
-                    ForEach(redirection.domain_names, id: \.self) { domain in
-                        Text(domain)
-                            .fontWeight(.bold)
-                            .font(.system(size: 16))
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text(redirection.domain_names.first ?? "No domain")
+                            .font(.headline)
+                        if redirection.domain_names.count > 1 {
+                            Text("+\(redirection.domain_names.count - 1)")
+                                .font(.caption)
+                                .padding(4)
+                                .background(Color.blue.opacity(0.2))
+                                .cornerRadius(4)
+                        }
                     }
+                    Text(self.redirection.forward_domain_name)
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
                 }
-                
                 Spacer()
+                StatusIconView(host: redirection)
             }
-            
             HStack {
-                Text(self.redirection.forward_domain_name)
-                    .font(.system(size: 14))
-                    .foregroundStyle(.gray)
-                
+                Text("Created: \(redirection.created_on)")
+                    .font(.caption)
+                    .foregroundColor(.gray)
                 Spacer()
-                
-                if cert == nil {
-                    Text("HTTP_ONLY")
-                        .font(.system(size: 13))
-                        .foregroundStyle(.gray)
-                } else {
-                    Text(LocalizedStringResource(stringLiteral: cert!.provider))
-                        .font(.system(size: 13))
-                        .foregroundStyle(.gray)
-                }
             }
-            .padding(.top, 2)
         }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color(uiColor: UIColor.secondarySystemBackground))
+                .shadow(color: .gray.opacity(0.2), radius: 2, y: 1)
+        )
+        .padding(.horizontal)
+        .padding(.vertical, 4)
     }
 }
 

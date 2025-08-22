@@ -38,7 +38,6 @@ struct ProxiesCreateView: View {
                 .pickerStyle(.segmented)
                 VStack(alignment: .leading) {
                     Text("FORWARD_HOST")
-                        .fontWeight(.bold)
                     TextField("FORWARD_HOST", text: $host)
                         .autocapitalization(.none)
                         .autocorrectionDisabled()
@@ -46,7 +45,6 @@ struct ProxiesCreateView: View {
                 }//HStack
                 HStack {
                     Text("FORWARD_PORT")
-                        .fontWeight(.bold)
                     TextField("FORWARD_PORT", text: $port)
                         .multilineTextAlignment(.trailing)
                         .autocapitalization(.none)
@@ -80,6 +78,7 @@ struct ProxiesCreateView: View {
                     }
                 }
             }//Section
+            .textCase(nil)
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {

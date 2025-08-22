@@ -32,7 +32,6 @@ struct ProxyLocationsView: View {
             Section {
                 HStack {
                     Text("LOCATION")
-                        .fontWeight(.bold)
                     TextField("/path", text: $path)
                         .multilineTextAlignment(.trailing)
                         .autocorrectionDisabled()
@@ -47,7 +46,6 @@ struct ProxyLocationsView: View {
                 
                 VStack(alignment: .leading) {
                     Text("FORWARD_HOST")
-                        .fontWeight(.bold)
                     TextField("203.0.113.25/path/", text: $host)
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
@@ -55,7 +53,6 @@ struct ProxyLocationsView: View {
                 
                 HStack {
                     Text("FORWARD_PORT")
-                        .fontWeight(.bold)
                     TextField("80", text: $port)
                         .multilineTextAlignment(.trailing)
                         .autocorrectionDisabled()
@@ -77,25 +74,21 @@ struct ProxyLocationsView: View {
                 VStack {
                     HStack {
                         Text("LOCATION")
-                            .fontWeight(.bold)
                         Spacer()
                         Text(location.path)
                     }
                     HStack {
                         Text("SCHEME")
-                            .fontWeight(.bold)
                         Spacer()
                         Text(location.forward_scheme)
                     }
                     HStack {
                         Text("FORWARD_HOST")
-                            .fontWeight(.bold)
                         Spacer()
                         Text(location.forward_host)
                     }
                     HStack {
                         Text("FORWARD_PORT")
-                            .fontWeight(.bold)
                         Spacer()
                         Text(String(location.forward_port))
                     }

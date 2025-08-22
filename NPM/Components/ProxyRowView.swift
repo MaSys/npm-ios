@@ -18,42 +18,44 @@ struct ProxyRowView: View {
             c.id == self.proxy.certificate_id
         }
     }
-    
+        
     var body: some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 8) {
             HStack {
-                StatusIconView(host: proxy)
-                
-                VStack(alignment: .leading) {
-                    ForEach(proxy.domain_names, id: \.self) { domain in
-                        Text(domain)
-                            .fontWeight(.bold)
-                            .font(.system(size: 16))
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text(proxy.domain_names.first ?? "No domain")
+                            .font(.headline)
+                        if proxy.domain_names.count > 1 {
+                            Text("+\(proxy.domain_names.count - 1)")
+                                .font(.caption)
+                                .padding(4)
+                                .background(Color.blue.opacity(0.2))
+                                .cornerRadius(4)
+                        }
                     }
+                    Text("\(proxy.forward_scheme)://\(proxy.forward_host):\(String(proxy.forward_port))")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
                 }
-                
                 Spacer()
+                StatusIconView(host: proxy)
             }
-            
             HStack {
-                Text("\(proxy.forward_scheme)://\(proxy.forward_host):\(String(proxy.forward_port))")
-                    .font(.system(size: 14))
-                    .foregroundStyle(.gray)
-                
+                Text("Created: \(proxy.created_on)")
+                    .font(.caption)
+                    .foregroundColor(.gray)
                 Spacer()
-                
-                if cert == nil {
-                    Text("HTTP_ONLY")
-                        .font(.system(size: 13))
-                        .foregroundStyle(.gray)
-                } else {
-                    Text(LocalizedStringResource(stringLiteral: cert!.provider))
-                        .font(.system(size: 13))
-                        .foregroundStyle(.gray)
-                }
             }
-            .padding(.top, 2)
         }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color(uiColor: UIColor.secondarySystemBackground))
+                .shadow(color: .gray.opacity(0.2), radius: 2, y: 1)
+        )
+        .padding(.horizontal)
+        .padding(.vertical, 4)
     }
 }
 

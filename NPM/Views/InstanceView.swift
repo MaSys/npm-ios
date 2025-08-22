@@ -28,7 +28,6 @@ struct InstanceView: View {
             Section {
                 HStack {
                     Text("SERVER_URL")
-                        .fontWeight(.bold)
                     TextField("SERVER_URL", text: $serverUrl)
                         .multilineTextAlignment(.trailing)
                         .keyboardType(.URL)
@@ -40,7 +39,6 @@ struct InstanceView: View {
                 
                 HStack {
                     Text("USERNAME")
-                        .fontWeight(.bold)
                     TextField("USERNAME", text: $username)
                         .multilineTextAlignment(.trailing)
                         .textInputAutocapitalization(.none)
@@ -50,7 +48,6 @@ struct InstanceView: View {
                 
                 HStack {
                     Text("PASSWORD")
-                        .fontWeight(.bold)
                     SecureField("PASSWORD", text: $password)
                         .multilineTextAlignment(.trailing)
                 }

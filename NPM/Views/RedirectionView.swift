@@ -21,6 +21,7 @@ struct RedirectionView: View {
     
     var body: some View {
         List {
+            domainNamesSection
             hostSection
             
             Section {
@@ -37,7 +38,7 @@ struct RedirectionView: View {
                         }
                     }
                 }//HStack
-            }
+            }//section
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -69,30 +70,28 @@ struct RedirectionView: View {
 }
 
 extension RedirectionView {
+    var domainNamesSection: some View {
+        Section(header: Text("DOMAIN_NAMES")) {
+            ForEach(self.redirection.domain_names, id: \.self) { domain in
+                Text(domain)
+            }
+        }//Section
+        .textCase(nil)
+    }//domainNamesSection
+    
     var hostSection: some View {
         Section {
-            VStack(alignment: .leading) {
-                Text("DOMAIN_NAMES")
-                    .fontWeight(.bold)
-                ForEach(self.redirection.domain_names, id: \.self) { domain in
-                    HStack {
-                        Image(systemName: "circle.fill")
-                            .resizable()
-                            .frame(width: 7, height: 7)
-                        Text(domain)
-                    }
-                    .padding(.leading, 2)
-                }
-                .padding(.leading)
-            }//VStack
-            
             HStack {
                 Text("HOST")
-                    .fontWeight(.bold)
                 Spacer()
                 Text("\(self.redirection.forward_scheme)://\(self.redirection.forward_domain_name)")
             }
-        }//Section
+            HStack {
+                Text("HTTP_CODE")
+                Spacer()
+                Text(String(redirection.forward_http_code))
+            }
+        }//section
     }//hostSection
 }
 

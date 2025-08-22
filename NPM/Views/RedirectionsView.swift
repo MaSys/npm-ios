@@ -13,17 +13,21 @@ struct RedirectionsView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(self.appService.redirections, id: \.id) { redirection in
-                    NavigationLink {
-                        RedirectionView(redirection: redirection)
-                            .environmentObject(AppService.shared)
-                    } label: {
-                        RedirectionRowView(redirection: redirection)
-                            .environmentObject(AppService.shared)
+            ScrollView {
+                LazyVStack(spacing: 8) {
+                    ForEach(self.appService.redirections, id: \.id) { redirection in
+                        NavigationLink {
+                            RedirectionView(redirection: redirection)
+                                .environmentObject(AppService.shared)
+                        } label: {
+                            RedirectionRowView(redirection: redirection)
+                                .environmentObject(AppService.shared)
+                        }
                     }
                 }
+                .padding(.vertical, 8)
             }
+            .background(Color(.systemGroupedBackground))
             .navigationTitle("REDIRECTIONS")
             .onAppear {
                 self.appService.fetchRedirections()

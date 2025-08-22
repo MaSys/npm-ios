@@ -38,6 +38,14 @@ struct ProxyView: View {
             hostSection
             
             Section {
+                HStack {
+                    Text("HOST")
+                    Spacer()
+                    Text(self.proxy.host)
+                }
+            }
+            
+            Section {
                 Toggle("CACHE_ASSETS", isOn: $cacheAssets)
                 Toggle("BLOCK_COMMON_EXPLOITS", isOn: $blockCommonExploits)
                 Toggle("WEBSOCKETS_SUPPORT", isOn: $websocketsSupport)
@@ -109,29 +117,12 @@ struct ProxyView: View {
 
 extension ProxyView {
     var hostSection: some View {
-        Section {
-            VStack(alignment: .leading) {
-                Text("DOMAIN_NAMES")
-                    .fontWeight(.bold)
-                ForEach(self.proxy.domain_names, id: \.self) { domain in
-                    HStack {
-                        Image(systemName: "circle.fill")
-                            .resizable()
-                            .frame(width: 7, height: 7)
-                        Link(domain, destination: fullDomain(from: domain))
-                    }
-                    .padding(.leading, 2)
-                }
-                .padding(.leading)
-            }//VStack
-            
-            HStack {
-                Text("HOST")
-                    .fontWeight(.bold)
-                Spacer()
-                Text(self.proxy.host)
+        Section(header: Text("DOMAIN_NAMES")) {
+            ForEach(self.proxy.domain_names, id: \.self) { domain in
+                Link(domain, destination: fullDomain(from: domain))
             }
         }//Section
+        .textCase(nil)
     }//hostSection
     
     private func fullDomain(from domain: String) -> URL {

@@ -40,7 +40,6 @@ struct ProxyEditView: View {
                 .pickerStyle(.segmented)
                 VStack(alignment: .leading) {
                     Text("FORWARD_HOST")
-                        .fontWeight(.bold)
                     TextField("FORWARD_HOST", text: $host)
                         .autocapitalization(.none)
                         .autocorrectionDisabled()
@@ -48,7 +47,6 @@ struct ProxyEditView: View {
                 }//HStack
                 HStack {
                     Text("FORWARD_PORT")
-                        .fontWeight(.bold)
                     TextField("FORWARD_PORT", text: $port)
                         .multilineTextAlignment(.trailing)
                         .autocapitalization(.none)
@@ -82,6 +80,7 @@ struct ProxyEditView: View {
                     }
                 }
             }//Section
+            .textCase(nil)
         }
         .onAppear {
             self.domains = self.proxy.domain_names

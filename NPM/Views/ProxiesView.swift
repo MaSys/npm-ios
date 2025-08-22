@@ -13,18 +13,25 @@ struct ProxiesView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(self.appService.proxies, id: \.id) { proxy in
-                    NavigationLink {
-                        ProxyView(proxy: proxy)
-                            .environmentObject(AppService.shared)
-                    } label: {
-                        ProxyRowView(proxy: proxy)
-                            .environmentObject(AppService.shared)
+            ScrollView {
+                LazyVStack(spacing: 8) {
+                    ForEach(self.appService.proxies, id: \.id) { proxy in
+                        NavigationLink {
+                            ProxyView(proxy: proxy)
+                                .environmentObject(AppService.shared)
+                        } label: {
+                            ProxyRowView(proxy: proxy)
+                                .environmentObject(AppService.shared)
+                        }
                     }
                 }
-            }//List
+                .padding(.vertical, 8)
+            }
+            .background(Color(.systemGroupedBackground))
             .navigationTitle("PROXY_HOSTS")
+            .onAppear {
+                self.appService.fetchProxies()
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
@@ -37,12 +44,11 @@ struct ProxiesView: View {
                 }
             }
         }//NavStack
-        .onAppear {
-            self.appService.fetchProxies()
-        }
     }
 }
 
 #Preview {
-    ProxiesView()
+    AppService.shared.proxies = [Proxy.fake(), Proxy.fake()]
+    return ProxiesView()
+        .environmentObject(AppService.shared)
 }

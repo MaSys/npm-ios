@@ -38,6 +38,9 @@
         }
       }
     },
+    "+%lld" : {
+
+    },
     "80" : {
 
     },
@@ -132,6 +135,9 @@
           }
         }
       }
+    },
+    "Created: %@" : {
+
     },
     "DASHBOARD" : {
       "localizations" : {
@@ -260,6 +266,7 @@
       }
     },
     "HTTP_ONLY" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
