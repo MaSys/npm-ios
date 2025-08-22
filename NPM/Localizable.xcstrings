@@ -126,6 +126,16 @@
         }
       }
     },
+    "CANCEL" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
     "CERTIFICATIONS" : {
       "localizations" : {
         "en" : {
@@ -145,6 +155,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dashboard"
+          }
+        }
+      }
+    },
+    "DELETE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
           }
         }
       }
@@ -266,7 +286,7 @@
       }
     },
     "HTTP_ONLY" : {
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {

@@ -10,6 +10,7 @@ import SwiftUI
 struct RedirectionView: View {
     
     @EnvironmentObject var appService: AppService
+    @Environment(\.dismiss) var dismiss
 
     var redirection: Redirection
     
@@ -18,6 +19,8 @@ struct RedirectionView: View {
             c.id == self.redirection.certificate_id
         }
     }
+    
+    @State private var isShowingDeleteConfirmation: Bool = false
     
     var body: some View {
         List {
@@ -39,6 +42,8 @@ struct RedirectionView: View {
                     }
                 }//HStack
             }//section
+            
+            deleteButton
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -64,6 +69,15 @@ struct RedirectionView: View {
 //                    }
 
                 }
+            }
+        }
+    }
+    
+    private func delete() {
+        RedirectionsRequest.delete(id: self.redirection.id) { success in
+            if success {
+                self.appService.fetchRedirections()
+                self.dismiss()
             }
         }
     }
@@ -93,6 +107,25 @@ extension RedirectionView {
             }
         }//section
     }//hostSection
+    
+    var deleteButton: some View {
+        Section {
+            HStack {
+                Spacer()
+                Button("DELETE") {
+                    self.isShowingDeleteConfirmation = true
+                }
+                .foregroundStyle(.red)
+                .confirmationDialog("DELETE", isPresented: $isShowingDeleteConfirmation) {
+                    Button("DELETE", role: .destructive) {
+                        self.delete()
+                    }
+                    Button("CANCEL", role: .cancel) {}
+                }
+                Spacer()
+            }//hstack
+        }//section
+    }
 }
 
 #Preview {

@@ -10,12 +10,14 @@ import SwiftUI
 struct ProxyView: View {
     
     @EnvironmentObject var appService: AppService
+    @Environment(\.dismiss) var dismiss
 
     var proxy: Proxy
     
     @State private var cacheAssets: Bool = false
     @State private var blockCommonExploits: Bool = false
     @State private var websocketsSupport: Bool = false
+    @State private var isShowingDeleteConfirmation: Bool = false
     
     var accessList: String {
         if let accessList = self.appService.accessLists.first(where: { al in
@@ -45,46 +47,11 @@ struct ProxyView: View {
                 }
             }
             
-            Section {
-                Toggle("CACHE_ASSETS", isOn: $cacheAssets)
-                Toggle("BLOCK_COMMON_EXPLOITS", isOn: $blockCommonExploits)
-                Toggle("WEBSOCKETS_SUPPORT", isOn: $websocketsSupport)
-            }
+            configSection
             
-            Section {
-                NavigationLink {
-                    ProxyAccessListView(proxy: self.proxy)
-                        .environmentObject(AppService.shared)
-                } label: {
-                    HStack {
-                        Text("ACCESS_LIST")
-                        Spacer()
-                        Text(LocalizedStringResource(stringLiteral: accessList))
-                            .foregroundStyle(.secondary)
-                    }//HStack
-                }//HStack
-                
-                NavigationLink {
-                    ProxyLocationsView(proxy: self.proxy)
-                        .environmentObject(AppService.shared)
-                } label: {
-                    Text("LOCATIONS")
-                }//HStack
-                
-                NavigationLink {
-                    SSLPickerView(host: self.proxy)
-                        .environmentObject(AppService.shared)
-                } label: {
-                    HStack {
-                        Text("SSL")
-                        Spacer()
-                        if cert != nil {
-                            Text(cert!.nice_name)
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                }//HStack
-            }
+            authConfigSection
+            
+            deleteButton
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -112,6 +79,15 @@ struct ProxyView: View {
                 }
             }
         }
+    }//body
+    
+    private func delete() {
+        ProxiesRequest.delete(id: self.proxy.id) { success in
+            if success {
+                self.appService.fetchProxies()
+                self.dismiss()
+            }
+        }
     }
 }
 
@@ -124,6 +100,70 @@ extension ProxyView {
         }//Section
         .textCase(nil)
     }//hostSection
+    
+    var configSection: some View {
+        Section {
+            Toggle("CACHE_ASSETS", isOn: $cacheAssets)
+            Toggle("BLOCK_COMMON_EXPLOITS", isOn: $blockCommonExploits)
+            Toggle("WEBSOCKETS_SUPPORT", isOn: $websocketsSupport)
+        }//section
+    }
+    
+    var authConfigSection: some View {
+        Section {
+            NavigationLink {
+                ProxyAccessListView(proxy: self.proxy)
+                    .environmentObject(AppService.shared)
+            } label: {
+                HStack {
+                    Text("ACCESS_LIST")
+                    Spacer()
+                    Text(LocalizedStringResource(stringLiteral: accessList))
+                        .foregroundStyle(.secondary)
+                }//HStack
+            }//HStack
+            
+            NavigationLink {
+                ProxyLocationsView(proxy: self.proxy)
+                    .environmentObject(AppService.shared)
+            } label: {
+                Text("LOCATIONS")
+            }//HStack
+            
+            NavigationLink {
+                SSLPickerView(host: self.proxy)
+                    .environmentObject(AppService.shared)
+            } label: {
+                HStack {
+                    Text("SSL")
+                    Spacer()
+                    if cert != nil {
+                        Text(cert!.nice_name)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }//HStack
+        }//section
+    }
+    
+    var deleteButton: some View {
+        Section {
+            HStack {
+                Spacer()
+                Button("DELETE") {
+                    self.isShowingDeleteConfirmation = true
+                }
+                .foregroundStyle(.red)
+                .confirmationDialog("DELETE", isPresented: $isShowingDeleteConfirmation) {
+                    Button("DELETE", role: .destructive) {
+                        self.delete()
+                    }
+                    Button("CANCEL", role: .cancel) {}
+                }
+                Spacer()
+            }//hstack
+        }//section
+    }
     
     private func fullDomain(from domain: String) -> URL {
         let scheme = self.proxy.certificate_id == 0 ? "http" : "https"
