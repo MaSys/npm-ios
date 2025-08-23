@@ -146,8 +146,15 @@
         }
       }
     },
-    "Created: %@" : {
-
+    "CREATED: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Created: %@"
+          }
+        }
+      }
     },
     "DASHBOARD" : {
       "localizations" : {
@@ -496,6 +503,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Streams"
+          }
+        }
+      }
+    },
+    "SUPPORT_FEEDBACK" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Support / Feedback"
           }
         }
       }

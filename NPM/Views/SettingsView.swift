@@ -60,6 +60,14 @@ struct SettingsView: View {
                         Text("ACCESS_LISTS")
                     }
                 }//Section
+                
+                Section {
+                    NavigationLink {
+                        EmptyView()
+                    } label: {
+                        Text("SUPPORT_FEEDBACK")
+                    }
+                }//Section
             }//List
             .navigationTitle(Text("SETTINGS"))
         }//NavStack

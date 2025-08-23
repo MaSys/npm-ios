@@ -46,7 +46,7 @@ struct RedirectionRowView: View {
                 StatusIconView(host: redirection)
             }
             HStack {
-                Text("Created: \(redirection.created_on)")
+                Text("CREATED: \(redirection.created_on)")
                     .font(.caption)
                     .foregroundColor(.gray)
                 Spacer()

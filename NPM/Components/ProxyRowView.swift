@@ -47,7 +47,7 @@ struct ProxyRowView: View {
                 StatusIconView(host: proxy)
             }
             HStack {
-                Text("Created: \(proxy.created_on)")
+                Text("CREATED: \(proxy.created_on)")
                     .font(.caption)
                     .foregroundColor(.gray)
                 Spacer()

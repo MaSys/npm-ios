@@ -50,7 +50,8 @@ struct RedirectionView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 HStack {
                     NavigationLink(destination: {
-                        EmptyView()
+                        RedirectionFormView(redirection: self.redirection)
+                            .environmentObject(self.appService)
                     }, label: {
                         Image(systemName: "square.and.pencil")
                     })

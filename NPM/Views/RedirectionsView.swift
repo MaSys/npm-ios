@@ -35,7 +35,7 @@ struct RedirectionsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
-                        RedirectionsCreateView()
+                        RedirectionFormView()
                             .environmentObject(self.appService)
                     } label: {
                         Image(systemName: "plus")
