@@ -89,6 +89,7 @@ struct InstanceView: View {
         self.npmPassword = self.password
         
         AuthRequest.login { success in
+            self.isLoading = false
             if success {
                 self.dismiss()
             } else {

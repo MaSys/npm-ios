@@ -146,6 +146,16 @@
         }
       }
     },
+    "COMING_SOON" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coming Soon!"
+          }
+        }
+      }
+    },
     "CREATED: %@" : {
       "localizations" : {
         "en" : {

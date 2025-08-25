@@ -35,30 +35,57 @@ struct SettingsView: View {
                 }//Section
                 
                 Section {
-                    NavigationLink {
-                        EmptyView()
-                    } label: {
+                    HStack {
                         Text("STREAMS")
+                        Spacer()
+                        Text("COMING_SOON")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
                     }
-                    
-                    NavigationLink {
-                        EmptyView()
-                    } label: {
+                    HStack {
                         Text("404_HOSTS")
+                        Spacer()
+                        Text("COMING_SOON")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
                     }
+//                    NavigationLink {
+//                        EmptyView()
+//                    } label: {
+//                        Text("STREAMS")
+//                    }
+//                    NavigationLink {
+//                        EmptyView()
+//                    } label: {
+//                        Text("404_HOSTS")
+//                    }
                 }//Section
                 
                 Section {
-                    NavigationLink {
-                        EmptyView()
-                    } label: {
+                    HStack {
                         Text("CERTIFICATIONS")
+                        Spacer()
+                        Text("COMING_SOON")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
                     }
-                    NavigationLink {
-                        EmptyView()
-                    } label: {
+                    HStack {
                         Text("ACCESS_LISTS")
+                        Spacer()
+                        Text("COMING_SOON")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
                     }
+//                    NavigationLink {
+//                        EmptyView()
+//                    } label: {
+//                        Text("CERTIFICATIONS")
+//                    }
+//                    NavigationLink {
+//                        EmptyView()
+//                    } label: {
+//                        Text("ACCESS_LISTS")
+//                    }
                 }//Section
                 
                 Section {
