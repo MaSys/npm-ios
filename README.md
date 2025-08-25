@@ -14,7 +14,7 @@ Manage Nginx Proxy Manager from your iPhone.
 
 
 
-| ![](https://github.com/MaSys/npm-ios/blob/main/screenshots/dashboard.png?raw=true) | ![](https://github.com/MaSys/npm-ios/blob/main/screenshots/proxies.png?raw=true) | ![](https://github.com/MaSys/npm-ios/blob/main/screenshots/redirections.png?raw=true) | ![](https://github.com/MaSys/npm-ios/blob/main/screenshots/settings.png?raw=true) |
+| ![](https://github.com/MaSys/npm-ios/blob/main/screenshots/dashboard.png?raw=true) | ![](https://github.com/MaSys/npm-ios/blob/main/screenshots/proxies.png?raw=true) | ![](https://github.com/MaSys/npm-ios/blob/main/screenshots/proxy.png?raw=true) | ![](https://github.com/MaSys/npm-ios/blob/main/screenshots/redirections.png?raw=true) |
 |:--:|:--:|:--:|:--:|
 
 ## Features ✨
