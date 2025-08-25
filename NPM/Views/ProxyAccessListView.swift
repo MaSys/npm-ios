@@ -49,6 +49,7 @@ struct ProxyAccessListView: View {
             }//Loop
         }//List
         .onAppear {
+            self.appService.fetchAccessLists()
             self.selectedAccessList = self.proxy.access_list_id
         }
         .toolbar {

@@ -73,6 +73,7 @@ struct SSLPickerView<T: Host>: View {
             }//List
         }//vstack
         .onAppear {
+            self.appService.fetchCerts()
             self.selectedCert = self.host.certificate_id
             self.forceSSL = self.host.ssl_forced
             self.httpSupport = self.host.http2_support
