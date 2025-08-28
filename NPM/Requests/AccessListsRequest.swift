@@ -23,7 +23,7 @@ class AccessListsRequest {
             return
         }
         
-        let url = URL(string: "\(baseUrl)/api/nginx/access-lists")!
+        let url = URL(string: "\(baseUrl)/api/nginx/access-lists?expand=items,clients")!
         let token = "Bearer \(auth.token)"
         AF.request(url, headers: ["Authorization": token])
             .responseDecodable(of: [AccessList].self) { response in
