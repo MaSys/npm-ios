@@ -13,6 +13,7 @@ class AppService: ObservableObject {
     
     @AppStorage("npm_server_url") var pangolinServerUrl: String = ""
     
+    @Published var plugins: [String: Plugin] = [:]
     @Published var certs: [Cert] = []
     @Published var proxies: [Proxy] = []
     @Published var accessLists: [AccessList] = []
@@ -39,6 +40,14 @@ class AppService: ObservableObject {
     public func fetchRedirections() {
         RedirectionsRequest.fetch { success, records in
             self.redirections = records
+        }
+    }
+    
+    public func setPlugins() {
+        if let plugins = loadPlugins(from: "certbot-dns-plugins.json") {
+            self.plugins = plugins
+        } else {
+            print("Failed to load plugins.")
         }
     }
 }

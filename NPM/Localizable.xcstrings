@@ -259,6 +259,9 @@
         }
       }
     },
+    "Hello, World!" : {
+
+    },
     "HOST" : {
       "localizations" : {
         "en" : {

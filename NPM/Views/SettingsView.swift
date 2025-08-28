@@ -62,30 +62,18 @@ struct SettingsView: View {
                 }//Section
                 
                 Section {
-                    HStack {
+                    NavigationLink {
+                        CertsView()
+                            .environmentObject(self.appService)
+                    } label: {
                         Text("CERTIFICATIONS")
-                        Spacer()
-                        Text("COMING_SOON")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
                     }
-                    HStack {
+                    NavigationLink {
+                        AccessListsView()
+                            .environmentObject(self.appService)
+                    } label: {
                         Text("ACCESS_LISTS")
-                        Spacer()
-                        Text("COMING_SOON")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
                     }
-//                    NavigationLink {
-//                        EmptyView()
-//                    } label: {
-//                        Text("CERTIFICATIONS")
-//                    }
-//                    NavigationLink {
-//                        EmptyView()
-//                    } label: {
-//                        Text("ACCESS_LISTS")
-//                    }
                 }//Section
                 
                 Section {

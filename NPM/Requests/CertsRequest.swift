@@ -23,7 +23,7 @@ class CertsRequest {
             return
         }
         
-        let url = URL(string: "\(baseUrl)/api/nginx/certificates")!
+        let url = URL(string: "\(baseUrl)/api/nginx/certificates?expand=proxy_hosts,dead_hosts,redirection_hosts")!
         let token = "Bearer \(auth.token)"
         AF.request(url, headers: ["Authorization": token])
             .responseDecodable(of: [Cert].self) { response in

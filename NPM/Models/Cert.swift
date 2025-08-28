@@ -15,4 +15,25 @@ struct Cert: Decodable {
     var domain_names: [String]
     var expires_on: String
     var meta: Meta
+    
+    var proxy_hosts: [Proxy]
+    var redirection_hosts: [Redirection]
+    var dead_hosts: [DeadHost]
+    
+    
+    var inUse: Bool {
+        if self.proxy_hosts.count != 0 {
+            return true
+        }
+        
+        if self.redirection_hosts.count != 0 {
+            return true
+        }
+        
+        if self.dead_hosts.count != 0 {
+            return true
+        }
+        
+        return false
+    }
 }
