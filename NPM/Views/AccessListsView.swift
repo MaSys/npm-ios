@@ -15,42 +15,57 @@ struct AccessListsView: View {
         ScrollView {
             LazyVStack(spacing: 8) {
                 ForEach(self.appService.accessLists, id: \.id) { accessList in
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(accessList.name)
-                            .font(.headline)
-                        
-                        HStack {
-                            Text("\(accessList.items.count) Users")
-                                .font(.subheadline)
+                    NavigationLink {
+                        AccessListFormView(accessList: accessList)
+                            .environmentObject(self.appService)
+                    } label: {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(accessList.name)
+                                .font(.headline)
+                            
+                            HStack {
+                                Text("\(accessList.items.count) Users")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                                Spacer()
+                                Text("\(accessList.proxy_host_count) Proxy Host")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                                Spacer()
+                                Text("\(accessList.clients.count) Rules")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
+                            
+                            Text("CREATED: \(accessList.created_on)")
+                                .font(.caption)
                                 .foregroundColor(.gray)
-                            Spacer()
-                            Text("\(accessList.proxy_host_count) Proxy Host")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                            Spacer()
-                            Text("\(accessList.clients.count) Rules")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                        }
-                        
-                        Text("CREATED: \(accessList.created_on)")
-                            .font(.caption)
-                            .foregroundColor(.gray)
+                        }//vstack
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color(uiColor: UIColor.secondarySystemBackground))
+                                .shadow(color: .gray.opacity(0.2), radius: 2, y: 1)
+                        )
+                        .padding(.horizontal)
+                        .padding(.vertical, 4)
                     }//vstack
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(uiColor: UIColor.secondarySystemBackground))
-                            .shadow(color: .gray.opacity(0.2), radius: 2, y: 1)
-                    )
-                    .padding(.horizontal)
-                    .padding(.vertical, 4)
-                }
+                }//navlink
             }//lazy
         }//scrollview
         .onAppear {
             self.appService.fetchAccessLists()
             self.appService.setPlugins()
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink {
+                    AccessListFormView()
+                        .environmentObject(self.appService)
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
         }
     }
 }

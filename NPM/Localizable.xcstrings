@@ -85,6 +85,16 @@
         }
       }
     },
+    "ACCESS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Access"
+          }
+        }
+      }
+    },
     "ACCESS_LIST" : {
       "localizations" : {
         "en" : {
@@ -111,6 +121,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Add"
+          }
+        }
+      }
+    },
+    "ADDRESS" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Address"
+          }
+        }
+      }
+    },
+    "allow" : {
+
+    },
+    "AUTHORIZATION" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authorization"
           }
         }
       }
@@ -191,6 +225,20 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete"
+          }
+        }
+      }
+    },
+    "deny" : {
+
+    },
+    "DIRECTIVE" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Directive"
           }
         }
       }
@@ -345,6 +393,9 @@
         }
       }
     },
+    "IP / Subnet" : {
+
+    },
     "letsencrypt" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -379,12 +430,32 @@
     "my.domain.local" : {
 
     },
+    "NAME" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        }
+      }
+    },
     "NONE" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "None"
+          }
+        }
+      }
+    },
+    "PASS_AUTH" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pass Auth to Host"
           }
         }
       }
@@ -472,6 +543,16 @@
         }
       }
     },
+    "SATISFY_ANY" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Satisfy Any"
+          }
+        }
+      }
+    },
     "SAVE" : {
       "localizations" : {
         "en" : {
@@ -513,7 +594,14 @@
       }
     },
     "SSL" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SSL"
+          }
+        }
+      }
     },
     "STREAMS" : {
       "extractionState" : "manual",
