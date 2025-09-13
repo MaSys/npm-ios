@@ -9,6 +9,10 @@ protocol Host {
     var id: Int { get }
     var meta: Meta { get }
     var enabled: Bool { get }
+}
+
+protocol SSLHost {
+    var id: Int { get }
     var certificate_id: Int { get }
     var ssl_forced: Bool { get }
     var http2_support: Bool { get }

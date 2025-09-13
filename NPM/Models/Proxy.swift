@@ -5,7 +5,7 @@
 //  Created by Yaser Almasri on 14/08/25.
 //
 
-struct Proxy: Host, Decodable {
+struct Proxy: Host, SSLHost, Decodable {
     var id: Int
     var created_on: String
     var modified_on: String

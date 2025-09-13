@@ -5,7 +5,7 @@
 //  Created by Yaser Almasri on 27/08/25.
 //
 
-struct DeadHost: Host, Decodable {
+struct DeadHost: Host, SSLHost, Decodable {
     var id: Int
     var created_on: String
     var modified_on: String

@@ -5,7 +5,7 @@
 //  Created by Yaser Almasri on 19/08/25.
 //
 
-struct Redirection: Host, Decodable {
+struct Redirection: Host, SSLHost, Decodable {
     var id: Int
     var created_on: String
     var modified_on: String

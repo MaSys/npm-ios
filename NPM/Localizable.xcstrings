@@ -27,6 +27,19 @@
         }
       }
     },
+    "%@:%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@:%2$@"
+          }
+        }
+      }
+    },
+    "%lld" : {
+
+    },
     "%lld DOMAINS" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -315,6 +328,9 @@
           }
         }
       }
+    },
+    "Hello, World!" : {
+
     },
     "HOST" : {
       "localizations" : {

@@ -35,12 +35,11 @@ struct SettingsView: View {
                 }//Section
                 
                 Section {
-                    HStack {
+                    NavigationLink {
+                        StreamsView()
+                            .environmentObject(self.appService)
+                    } label: {
                         Text("STREAMS")
-                        Spacer()
-                        Text("COMING_SOON")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
                     }
                     HStack {
                         Text("404_HOSTS")
@@ -49,11 +48,6 @@ struct SettingsView: View {
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
-//                    NavigationLink {
-//                        EmptyView()
-//                    } label: {
-//                        Text("STREAMS")
-//                    }
 //                    NavigationLink {
 //                        EmptyView()
 //                    } label: {

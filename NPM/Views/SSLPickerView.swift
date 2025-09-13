@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SSLPickerView<T: Host>: View {
+struct SSLPickerView<T: SSLHost>: View {
     
     @EnvironmentObject var appService: AppService
     @Environment(\.dismiss) var dismiss
