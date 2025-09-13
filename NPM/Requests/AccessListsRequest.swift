@@ -117,4 +117,33 @@ class AccessListsRequest {
                 }
             }
     }
+    
+    public static func delete(
+        id: Int,
+        completionHandler: @escaping (_ success: Bool) -> Void
+    ) {
+        let userDefaults = UserDefaults.standard
+        guard let baseUrl = userDefaults.string(forKey: "npm_server_url"),
+              let auth_data = userDefaults.data(forKey: "npm_auth") else {
+            completionHandler(false)
+            return
+        }
+        guard let auth = try? JSONDecoder().decode(Auth.self, from: auth_data) else {
+            return
+        }
+        
+        let url = URL(string: "\(baseUrl)/api/nginx/access-lists/\(id)")!
+        let token = "Bearer \(auth.token)"
+        let encoding = JSONEncoding.default
+        AF.request(url,method: .delete, encoding: encoding, headers: ["Authorization": token])
+            .responseDecodable(of: Bool.self) { response in
+                switch response.result {
+                case .success(let success):
+                    completionHandler(success)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(false)
+                }
+            }
+    }
 }

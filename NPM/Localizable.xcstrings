@@ -126,7 +126,7 @@
       }
     },
     "ADDRESS" : {
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -233,7 +233,7 @@
 
     },
     "DIRECTIVE" : {
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -271,7 +271,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unable to connect to server, please check your credentials!"
+            "value" : "Unable to connect to server, please check your Server URL or credentials!"
           }
         }
       }

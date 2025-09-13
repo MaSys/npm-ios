@@ -20,6 +20,7 @@ struct AccessListFormView: View {
     @State private var ipAddresses: [IpAddress] = []
     
     @State private var isLoading: Bool = false
+    @State private var isShowingDeleteConfirmation: Bool = false
     
     var accessList: AccessList?
     
@@ -40,6 +41,10 @@ struct AccessListFormView: View {
             authorizationSection
             
             accessSection
+            
+            if self.accessList != nil {
+                deleteButton
+            }
         }
         .onAppear {
             if let access = self.accessList {
@@ -100,6 +105,17 @@ struct AccessListFormView: View {
                 })
             ) { success, record in
                 self.isLoading = false
+                if success {
+                    self.appService.fetchAccessLists()
+                    self.dismiss()
+                }
+            }
+        }
+    }//save
+    
+    private func delete() {
+        if let al = self.accessList {
+            AccessListsRequest.delete(id: al.id) { success in
                 if success {
                     self.appService.fetchAccessLists()
                     self.dismiss()
@@ -187,6 +203,25 @@ extension AccessListFormView {
             }
         }//section
     }//accessSection
+    
+    var deleteButton: some View {
+        Section {
+            HStack {
+                Spacer()
+                Button("DELETE") {
+                    self.isShowingDeleteConfirmation = true
+                }
+                .foregroundStyle(.red)
+                .confirmationDialog("DELETE", isPresented: $isShowingDeleteConfirmation) {
+                    Button("DELETE", role: .destructive) {
+                        self.delete()
+                    }
+                    Button("CANCEL", role: .cancel) {}
+                }
+                Spacer()
+            }//hstack
+        }//section
+    }
 }
 
 #Preview {
