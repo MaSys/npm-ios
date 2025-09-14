@@ -329,9 +329,6 @@
         }
       }
     },
-    "Hello, World!" : {
-
-    },
     "HOST" : {
       "localizations" : {
         "en" : {
@@ -398,6 +395,16 @@
     },
     "https" : {
 
+    },
+    "INCOMING_PORT" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incoming Port"
+          }
+        }
+      }
     },
     "INSTANCE" : {
       "localizations" : {
@@ -636,6 +643,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Support / Feedback"
+          }
+        }
+      }
+    },
+    "TCP_FORWARDING" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TCP Forwarding"
+          }
+        }
+      }
+    },
+    "UDP_FORWARDING" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UDP Forwarding"
           }
         }
       }

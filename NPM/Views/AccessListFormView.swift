@@ -221,7 +221,7 @@ extension AccessListFormView {
                 Spacer()
             }//hstack
         }//section
-    }
+    }//deleteButton
 }
 
 #Preview {
