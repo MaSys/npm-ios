@@ -82,6 +82,12 @@ struct InstanceView: View {
             return
         }
         
+        guard let url = URL(string: self.serverUrl), url.host != nil else {
+            self.isLoading = false
+            self.connectionError = true
+            return
+        }
+        
         self.isLoading = true
         self.connectionError = false
         self.npmServerUrl = self.serverUrl
