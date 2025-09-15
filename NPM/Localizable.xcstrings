@@ -416,6 +416,16 @@
         }
       }
     },
+    "INVALID_SERVER_URL" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid Server URL!"
+          }
+        }
+      }
+    },
     "IP / Subnet" : {
 
     },

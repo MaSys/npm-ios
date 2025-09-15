@@ -20,8 +20,11 @@ struct InstanceView: View {
     @State private var serverUrl = ""
     @State private var username = ""
     @State private var password = ""
+    
     @State private var connectionError: Bool = false
+    @State private var isInvalidURL: Bool = false
     @State private var isLoading: Bool = false
+
     
     var body: some View {
         Form {
@@ -57,6 +60,13 @@ struct InstanceView: View {
                         .foregroundStyle(.red)
                         .font(.system(size: 14))
                 }
+                
+                if isInvalidURL {
+                    Text("INVALID_SERVER_URL")
+                        .foregroundStyle(.red)
+                        .font(.system(size: 14))
+                }
+
             }
         }
         .onAppear {
@@ -78,18 +88,19 @@ struct InstanceView: View {
     }
     
     private func save() {
+        self.isInvalidURL = false
+        self.connectionError = false
+        
         if self.serverUrl.isEmpty || self.username.isEmpty || self.password.isEmpty {
             return
         }
         
         guard let url = URL(string: self.serverUrl), url.host != nil else {
-            self.isLoading = false
-            self.connectionError = true
+            self.isInvalidURL = true
             return
         }
         
         self.isLoading = true
-        self.connectionError = false
         self.npmServerUrl = self.serverUrl
         self.npmUsername = self.username
         self.npmPassword = self.password
