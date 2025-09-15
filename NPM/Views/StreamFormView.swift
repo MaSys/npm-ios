@@ -19,6 +19,7 @@ struct StreamFormView: View {
     @State private var forwardPort: String = ""
     @State private var tcpForwarding: Bool = false
     @State private var udpForwarding: Bool = false
+    @State private var certificateId: Int = 0
     
     @State private var isLoading: Bool = false
     @State private var isShowingDeleteConfirmation: Bool = false
@@ -56,6 +57,8 @@ struct StreamFormView: View {
                 Toggle("UDP_FORWARDING", isOn: $udpForwarding)
             }
             
+            certificatePicker
+            
             if self.stream != nil {
                 deleteButton
             }
@@ -67,6 +70,7 @@ struct StreamFormView: View {
                 self.forwardPort = String(strm.forwarding_port)
                 self.tcpForwarding = strm.tcp_forwarding
                 self.udpForwarding = strm.udp_forwarding
+                self.certificateId = strm.certificate_id
             }
         }
         .toolbar {
@@ -88,7 +92,7 @@ struct StreamFormView: View {
                 forwardPort: Int(self.forwardPort)!,
                 tcpForwarding: self.tcpForwarding,
                 udpForwarding: self.udpForwarding,
-                certificateId: 0
+                certificateId: self.certificateId
             ) { success, record in
                 self.isLoading = false
                 if success {
@@ -104,7 +108,7 @@ struct StreamFormView: View {
                 forwardPort: Int(self.forwardPort)!,
                 tcpForwarding: self.tcpForwarding,
                 udpForwarding: self.udpForwarding,
-                certificateId: 0
+                certificateId: self.certificateId
             ) { success, record in
                 self.isLoading = false
                 if success {
@@ -148,6 +152,18 @@ extension StreamFormView {
             }//hstack
         }//section
     }//deleteButton
+    
+    var certificatePicker: some View {
+        Picker("SSL", selection: $certificateId) {
+            Text("NONE")
+                .tag(0)
+            ForEach(self.appService.certs, id: \.id) { cert in
+                Text(cert.nice_name)
+                    .tag(cert.id)
+            }
+        }//picker
+        .pickerStyle(.navigationLink)
+    }//certificatePicker
 }
 
 #Preview {
