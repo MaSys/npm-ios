@@ -26,6 +26,7 @@ struct DeadHostsView: View {
             }
             .padding(.vertical, 8)
         }
+        .navigationTitle("404_HOSTS")
         .onAppear {
             self.appService.fetchDeadHosts()
         }

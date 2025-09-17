@@ -53,6 +53,7 @@ struct AccessListsView: View {
                 }//navlink
             }//lazy
         }//scrollview
+        .navigationTitle("ACCESS_LISTS")
         .onAppear {
             self.appService.fetchAccessLists()
             self.appService.setPlugins()

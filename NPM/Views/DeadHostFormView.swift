@@ -27,6 +27,12 @@ struct DeadHostFormView: View {
     @State private var isLoading: Bool = false
     @State private var isShowingDeleteConfirmation: Bool = false
     
+    var validForm: Bool {
+        if self.domains.isEmpty { return false }
+        
+        return true
+    }
+    
     init(host: DeadHost? = nil) {
         self.host = host
         if let deadHost = host {
@@ -54,17 +60,60 @@ struct DeadHostFormView: View {
                 Button("SAVE") {
                     self.save()
                 }
-                .disabled(self.isLoading)
+                .disabled(self.isLoading || !self.validForm)
             }
         }
     }
     
     private func save() {
+        if !self.validForm { return }
         
+        self.isLoading = true
+        if self.host == nil {
+            DeadHostsRequest.create(
+                domains: self.domains,
+                certificateId: self.certificateId,
+                forceSSL: self.forceSSL,
+                httpSupport: self.httpSupport,
+                hsts: self.hsts,
+                hstsSubdomains: self.hstsSubdomains
+            ) { success, record in
+                self.isLoading = false
+                if success {
+                    self.appService.fetchDeadHosts()
+                    self.dismiss()
+                }
+            }
+        } else {
+            DeadHostsRequest.update(
+                id: self.host!.id,
+                domains: self.domains,
+                certificateId: self.certificateId,
+                forceSSL: self.forceSSL,
+                httpSupport: self.httpSupport,
+                hsts: self.hsts,
+                hstsSubdomains: self.hstsSubdomains
+            ) { success, record in
+                self.isLoading = false
+                if success {
+                    self.appService.fetchDeadHosts()
+                    self.dismiss()
+                }
+            }
+        }
     }
     
     private func delete() {
-        
+        self.isLoading = true
+        DeadHostsRequest.delete(
+            id: self.host!.id,
+        ) { success in
+            self.isLoading = false
+            if success {
+                self.appService.fetchDeadHosts()
+                self.dismiss()
+            }
+        }
     }
 }
 

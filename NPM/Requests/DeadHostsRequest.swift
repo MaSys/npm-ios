@@ -39,12 +39,12 @@ class DeadHostsRequest {
     }
     
     public static func create(
-        incomingPort: Int,
-        forwardHost: String,
-        forwardPort: Int,
-        tcpForwarding: Bool,
-        udpForwarding: Bool,
+        domains: [String],
         certificateId: Int,
+        forceSSL: Bool,
+        httpSupport: Bool,
+        hsts: Bool,
+        hstsSubdomains: Bool,
         completionHandler: @escaping (_ success: Bool, _ record: DeadHost?) -> Void
     ) {
         let userDefaults = UserDefaults.standard
@@ -62,11 +62,11 @@ class DeadHostsRequest {
         let token = "Bearer \(auth.token)"
         let encoding = JSONEncoding.default
         AF.request(url, method: .post, parameters: [
-            "incoming_port": incomingPort,
-            "forwarding_host": forwardHost,
-            "forwarding_port": forwardPort,
-            "tcp_forwarding": tcpForwarding,
-            "udp_forwarding": udpForwarding,
+            "domain_names": domains,
+            "ssl_forced": forceSSL,
+            "hsts_enabled": hsts,
+            "hsts_subdomains": hstsSubdomains,
+            "http2_support": httpSupport,
             "certificate_id": certificateId
         ], encoding: encoding, headers: ["Authorization": token])
         .printError()
@@ -84,12 +84,12 @@ class DeadHostsRequest {
     
     public static func update(
         id: Int,
-        incomingPort: Int,
-        forwardHost: String,
-        forwardPort: Int,
-        tcpForwarding: Bool,
-        udpForwarding: Bool,
+        domains: [String],
         certificateId: Int,
+        forceSSL: Bool,
+        httpSupport: Bool,
+        hsts: Bool,
+        hstsSubdomains: Bool,
         completionHandler: @escaping (_ success: Bool, _ record: DeadHost?) -> Void
     ) {
         let userDefaults = UserDefaults.standard
@@ -107,11 +107,11 @@ class DeadHostsRequest {
         let token = "Bearer \(auth.token)"
         let encoding = JSONEncoding.default
         AF.request(url, method: .put, parameters: [
-            "incoming_port": incomingPort,
-            "forwarding_host": forwardHost,
-            "forwarding_port": forwardPort,
-            "tcp_forwarding": tcpForwarding,
-            "udp_forwarding": udpForwarding,
+            "domain_names": domains,
+            "ssl_forced": forceSSL,
+            "hsts_enabled": hsts,
+            "hsts_subdomains": hstsSubdomains,
+            "http2_support": httpSupport,
             "certificate_id": certificateId
         ], encoding: encoding, headers: ["Authorization": token])
             .responseDecodable(of: DeadHost.self) { response in
