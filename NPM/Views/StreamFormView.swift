@@ -24,6 +24,18 @@ struct StreamFormView: View {
     @State private var isLoading: Bool = false
     @State private var isShowingDeleteConfirmation: Bool = false
     
+    init(stream: Stream? = nil) {
+        self.stream = stream
+        if let strm = stream {
+            self._incomingPort = State(initialValue: String(strm.incoming_port))
+            self._forwardHost = State(initialValue: strm.forwarding_host)
+            self._forwardPort = State(initialValue: String(strm.forwarding_port))
+            self._tcpForwarding = State(initialValue: strm.tcp_forwarding)
+            self._udpForwarding = State(initialValue: strm.udp_forwarding)
+            self._certificateId = State(initialValue: strm.certificate_id)
+        }
+    }
+    
     var body: some View {
         Form {
             Section {
@@ -63,16 +75,6 @@ struct StreamFormView: View {
                 deleteButton
             }
         }//form
-        .onAppear {
-            if let strm = self.stream {
-                self.incomingPort = String(strm.incoming_port)
-                self.forwardHost = strm.forwarding_host
-                self.forwardPort = String(strm.forwarding_port)
-                self.tcpForwarding = strm.tcp_forwarding
-                self.udpForwarding = strm.udp_forwarding
-                self.certificateId = strm.certificate_id
-            }
-        }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("SAVE") {

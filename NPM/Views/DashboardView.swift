@@ -14,7 +14,7 @@ struct DashboardView: View {
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
-                let squareSize = (geometry.size.width - 40) / 2 // 20 padding + 10 spacing
+                let squareSize = (geometry.size.width - 40) / 2 // 20 padding + 20 spacing
                 VStack {
                     HStack {
                         DashboardCardView(
