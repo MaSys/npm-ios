@@ -19,6 +19,7 @@ class AppService: ObservableObject {
     @Published var accessLists: [AccessList] = []
     @Published var redirections: [Redirection] = []
     @Published var streams: [Stream] = []
+    @Published var deadHosts: [DeadHost] = []
     
     public func fetchCerts() {
         CertsRequest.fetch { success, records in
@@ -47,6 +48,12 @@ class AppService: ObservableObject {
     public func fetchStreams() {
         StreamsRequest.fetch { success, records in
             self.streams = records
+        }
+    }
+    
+    public func fetchDeadHosts() {
+        DeadHostsRequest.fetch { success, records in
+            self.deadHosts = records
         }
     }
     

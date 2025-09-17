@@ -203,6 +203,7 @@
       }
     },
     "COMING_SOON" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

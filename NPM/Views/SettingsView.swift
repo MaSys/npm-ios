@@ -41,18 +41,12 @@ struct SettingsView: View {
                     } label: {
                         Text("STREAMS")
                     }
-                    HStack {
+                    NavigationLink {
+                        DeadHostsView()
+                            .environmentObject(self.appService)
+                    } label: {
                         Text("404_HOSTS")
-                        Spacer()
-                        Text("COMING_SOON")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
                     }
-//                    NavigationLink {
-//                        EmptyView()
-//                    } label: {
-//                        Text("404_HOSTS")
-//                    }
                 }//Section
                 
                 Section {
