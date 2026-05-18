@@ -10,12 +10,22 @@ import SwiftUI
 struct ProxiesView: View {
     
     @EnvironmentObject var appService: AppService
+    @State private var searchText = ""
+
+    var filteredProxies: [Proxy] {
+        guard !searchText.isEmpty else { return appService.proxies }
+        let options: String.CompareOptions = [.caseInsensitive, .diacriticInsensitive]
+        return appService.proxies.filter { proxy in
+            proxy.domain_names.contains { $0.range(of: searchText, options: options) != nil }
+            || proxy.forward_host.range(of: searchText, options: options) != nil
+        }
+    }
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 8) {
-                    ForEach(self.appService.proxies, id: \.id) { proxy in
+                    ForEach(filteredProxies, id: \.id) { proxy in
                         NavigationLink {
                             ProxyView(proxy: proxy)
                                 .environmentObject(AppService.shared)
@@ -45,6 +55,7 @@ struct ProxiesView: View {
                 }
             }
         }//NavStack
+        .searchable(text: $searchText, prompt: "Search")
     }
 }
 
