@@ -17,6 +17,9 @@ Manage Nginx Proxy Manager from your iPhone.
 | ![](https://github.com/MaSys/npm-ios/blob/main/screenshots/dashboard.png?raw=true) | ![](https://github.com/MaSys/npm-ios/blob/main/screenshots/proxies.png?raw=true) | ![](https://github.com/MaSys/npm-ios/blob/main/screenshots/proxy.png?raw=true) | ![](https://github.com/MaSys/npm-ios/blob/main/screenshots/redirections.png?raw=true) |
 |:--:|:--:|:--:|:--:|
 
+## AI Usage
+NOTE: This iOS app uses AI for development, the usage of AI is for assistant and every piece of code is getting reviewed by the developer to prevent any issue.
+
 ## Features ✨
 - Dashboard.
 - Manage Proxy Hosts (Create, Update, Delete, Enable/Disable).
