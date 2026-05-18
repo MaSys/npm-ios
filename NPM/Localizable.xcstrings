@@ -227,7 +227,14 @@
       }
     },
     "CREDENTIALS" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Credentials"
+          }
+        }
+      }
     },
     "DASHBOARD" : {
       "localizations" : {
@@ -491,7 +498,14 @@
       }
     },
     "NEW_CERT" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Certificate"
+          }
+        }
+      }
     },
     "NONE" : {
       "localizations" : {
@@ -534,7 +548,14 @@
       }
     },
     "PROPAGATION_SECONDS" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Propagation Seconds"
+          }
+        }
+      }
     },
     "PROXY" : {
       "localizations" : {
