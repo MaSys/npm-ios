@@ -66,6 +66,9 @@
     "80" : {
 
     },
+    "120" : {
+
+    },
     "203.0.113.25/path/" : {
 
     },
@@ -223,6 +226,9 @@
         }
       }
     },
+    "CREDENTIALS" : {
+
+    },
     "DASHBOARD" : {
       "localizations" : {
         "en" : {
@@ -253,6 +259,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Directive"
+          }
+        }
+      }
+    },
+    "DNS_PROVIDER" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DNS Provider"
           }
         }
       }
@@ -474,6 +490,9 @@
         }
       }
     },
+    "NEW_CERT" : {
+
+    },
     "NONE" : {
       "localizations" : {
         "en" : {
@@ -513,6 +532,9 @@
           }
         }
       }
+    },
+    "PROPAGATION_SECONDS" : {
+
     },
     "PROXY" : {
       "localizations" : {
@@ -677,6 +699,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "UDP Forwarding"
+          }
+        }
+      }
+    },
+    "USE_DNS_CHALLENGE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use a DNS Challenge"
           }
         }
       }

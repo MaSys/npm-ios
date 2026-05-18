@@ -61,9 +61,20 @@ struct CertsView: View {
                 }
             }//lazy
         }//scrollview
+        .navigationTitle("CERTIFICATIONS")
         .onAppear {
             self.appService.fetchCerts()
             self.appService.setPlugins()
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink {
+                    CertCreateView()
+                        .environmentObject(self.appService)
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
         }
     }
     
