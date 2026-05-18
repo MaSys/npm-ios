@@ -66,6 +66,9 @@
     "80" : {
 
     },
+    "120" : {
+
+    },
     "203.0.113.25/path/" : {
 
     },
@@ -223,6 +226,16 @@
         }
       }
     },
+    "CREDENTIALS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Credentials"
+          }
+        }
+      }
+    },
     "DASHBOARD" : {
       "localizations" : {
         "en" : {
@@ -253,6 +266,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Directive"
+          }
+        }
+      }
+    },
+    "DNS_PROVIDER" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DNS Provider"
           }
         }
       }
@@ -474,6 +497,16 @@
         }
       }
     },
+    "NEW_CERT" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Certificate"
+          }
+        }
+      }
+    },
     "NONE" : {
       "localizations" : {
         "en" : {
@@ -510,6 +543,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Preserve Path"
+          }
+        }
+      }
+    },
+    "PROPAGATION_SECONDS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Propagation Seconds"
           }
         }
       }
@@ -677,6 +720,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "UDP Forwarding"
+          }
+        }
+      }
+    },
+    "USE_DNS_CHALLENGE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use a DNS Challenge"
           }
         }
       }
