@@ -37,6 +37,18 @@ final class InstanceConnectivityRequestTests: XCTestCase {
         )
     }
 
+    func testConnectedStatusIsNotRetryable() {
+        XCTAssertFalse(InstanceConnectivityStatus.connected.isRetryable)
+    }
+
+    func testAuthenticationFailureIsRetryable() {
+        XCTAssertTrue(InstanceConnectivityStatus.authenticationFailed.isRetryable)
+    }
+
+    func testServerUnavailableIsRetryable() {
+        XCTAssertTrue(InstanceConnectivityStatus.serverUnavailable.isRetryable)
+    }
+
     func testMissingStoredAuthenticationReturnsAuthenticationFailure() {
         let suiteName = "\(Self.self).\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!

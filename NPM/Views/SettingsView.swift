@@ -23,7 +23,7 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 Section(header: Text("")) {
-                    HStack {
+                    VStack(alignment: .leading, spacing: 5) {
                         NavigationLink {
                             InstanceView()
                                 .environmentObject(AppService.shared)
@@ -34,20 +34,12 @@ struct SettingsView: View {
                                     Text(self.npmServerUrl)
                                         .foregroundStyle(.gray)
                                         .font(.system(size: 14))
-                                    connectivityStatusView
                                 }
                             }
                         }
 
                         if !self.npmServerUrl.isEmpty {
-                            Button {
-                                self.checkConnectivity()
-                            } label: {
-                                Image(systemName: "arrow.clockwise")
-                            }
-                            .accessibilityLabel(Text("RETRY"))
-                            .buttonStyle(.borderless)
-                            .disabled(self.isCheckingConnectivity)
+                            connectivityStatusView
                         }
                     }
                 }//Section
@@ -113,17 +105,26 @@ struct SettingsView: View {
             } else {
                 switch self.connectivityStatus {
                 case .connected:
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundStyle(.green)
-                    Text("INSTANCE_CONNECTED")
+                    statusAction(
+                        for: .connected,
+                        icon: "checkmark.circle.fill",
+                        color: .green,
+                        text: "INSTANCE_CONNECTED"
+                    )
                 case .authenticationFailed:
-                    Image(systemName: "exclamationmark.circle.fill")
-                        .foregroundStyle(.red)
-                    Text("INSTANCE_AUTHENTICATION_FAILED")
+                    statusAction(
+                        for: .authenticationFailed,
+                        icon: "exclamationmark.circle.fill",
+                        color: .red,
+                        text: "INSTANCE_AUTHENTICATION_FAILED_RETRY"
+                    )
                 case .serverUnavailable:
-                    Image(systemName: "exclamationmark.circle.fill")
-                        .foregroundStyle(.red)
-                    Text("INSTANCE_SERVER_UNAVAILABLE")
+                    statusAction(
+                        for: .serverUnavailable,
+                        icon: "exclamationmark.circle.fill",
+                        color: .red,
+                        text: "INSTANCE_SERVER_UNAVAILABLE_RETRY"
+                    )
                 case nil:
                     EmptyView()
                 }
@@ -131,6 +132,42 @@ struct SettingsView: View {
         }
         .foregroundStyle(.secondary)
         .font(.system(size: 14))
+    }
+
+    private func statusLabel(
+        icon: String,
+        color: Color,
+        text: LocalizedStringKey
+    ) -> some View {
+        HStack(spacing: 5) {
+            Image(systemName: icon)
+                .foregroundStyle(color)
+            Text(text)
+        }
+    }
+
+    @ViewBuilder
+    private func statusAction(
+        for status: InstanceConnectivityStatus,
+        icon: String,
+        color: Color,
+        text: LocalizedStringKey
+    ) -> some View {
+        if status.isRetryable {
+            Button {
+                self.checkConnectivity()
+            } label: {
+                statusLabel(icon: icon, color: color, text: text)
+            }
+            .buttonStyle(.plain)
+            .disabled(self.isCheckingConnectivity)
+        } else {
+            statusLabel(
+                icon: icon,
+                color: color,
+                text: text
+            )
+        }
     }
 
     private func checkConnectivity() {

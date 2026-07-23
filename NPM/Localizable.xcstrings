@@ -440,12 +440,12 @@
         }
       }
     },
-    "INSTANCE_AUTHENTICATION_FAILED" : {
+    "INSTANCE_AUTHENTICATION_FAILED_RETRY" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Authentication failed"
+            "value" : "Authentication failed · Tap to retry"
           }
         }
       }
@@ -470,12 +470,12 @@
         }
       }
     },
-    "INSTANCE_SERVER_UNAVAILABLE" : {
+    "INSTANCE_SERVER_UNAVAILABLE_RETRY" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Server unavailable"
+            "value" : "Server unavailable · Tap to retry"
           }
         }
       }
@@ -676,16 +676,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save"
-          }
-        }
-      }
-    },
-    "RETRY" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Retry"
           }
         }
       }
