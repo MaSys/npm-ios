@@ -3,10 +3,14 @@ import Foundation
 
 class InstanceConnectivityRequest {
     static func request(baseURL: String, token: String) -> URLRequest? {
-        guard let url = URL(string: "\(baseURL)/api/users/me") else {
+        guard let baseURL = URL(string: baseURL) else {
             return nil
         }
 
+        let url = baseURL
+            .appendingPathComponent("api")
+            .appendingPathComponent("users")
+            .appendingPathComponent("me")
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
@@ -21,7 +25,9 @@ class InstanceConnectivityRequest {
               let authData = userDefaults.data(forKey: "npm_auth"),
               let auth = try? JSONDecoder().decode(Auth.self, from: authData),
               let request = request(baseURL: baseURL, token: auth.token) else {
-            completionHandler(.authenticationFailed)
+            DispatchQueue.main.async {
+                completionHandler(.authenticationFailed)
+            }
             return
         }
 

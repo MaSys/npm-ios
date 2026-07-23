@@ -38,13 +38,36 @@ final class InstanceConnectivityRequestTests: XCTestCase {
     }
 
     func testMissingStoredAuthenticationReturnsAuthenticationFailure() {
-        let defaults = UserDefaults(suiteName: #function)!
+        let suiteName = "\(Self.self).\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer {
+            defaults.removePersistentDomain(forName: suiteName)
+        }
         defaults.set("https://npm.example.com", forKey: "npm_server_url")
 
         let expectation = expectation(description: "completion")
         InstanceConnectivityRequest.check(userDefaults: defaults) { status in
             XCTAssertEqual(status, .authenticationFailed)
             expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testMissingStoredAuthenticationCompletesOnMainThread() {
+        let suiteName = "\(Self.self).\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer {
+            defaults.removePersistentDomain(forName: suiteName)
+        }
+        defaults.set("https://npm.example.com", forKey: "npm_server_url")
+
+        let expectation = expectation(description: "completion")
+        DispatchQueue.global().async {
+            InstanceConnectivityRequest.check(userDefaults: defaults) { _ in
+                XCTAssertTrue(Thread.isMainThread)
+                expectation.fulfill()
+            }
         }
 
         wait(for: [expectation], timeout: 1)
@@ -63,5 +86,16 @@ final class InstanceConnectivityRequestTests: XCTestCase {
             request.value(forHTTPHeaderField: "Authorization"),
             "Bearer test-token"
         )
+    }
+
+    func testRequestHandlesTrailingSlashInBaseURL() throws {
+        let request = try XCTUnwrap(
+            InstanceConnectivityRequest.request(
+                baseURL: "https://npm.example.com/",
+                token: "test-token"
+            )
+        )
+
+        XCTAssertEqual(request.url?.absoluteString, "https://npm.example.com/api/users/me")
     }
 }

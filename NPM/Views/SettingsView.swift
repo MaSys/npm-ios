@@ -17,6 +17,7 @@ struct SettingsView: View {
 
     @State private var connectivityStatus: InstanceConnectivityStatus?
     @State private var isCheckingConnectivity = false
+    @State private var connectivityCheckID = UUID()
     
     var body: some View {
         NavigationStack {
@@ -133,14 +134,23 @@ struct SettingsView: View {
     }
 
     private func checkConnectivity() {
+        let checkID = UUID()
+        self.connectivityCheckID = checkID
+
         guard !self.npmServerUrl.isEmpty else {
             self.connectivityStatus = nil
             self.isCheckingConnectivity = false
             return
         }
 
+        let serverURL = self.npmServerUrl
         self.isCheckingConnectivity = true
         InstanceConnectivityRequest.check { status in
+            guard self.connectivityCheckID == checkID,
+                  self.npmServerUrl == serverURL else {
+                return
+            }
+
             self.connectivityStatus = status
             self.isCheckingConnectivity = false
         }
