@@ -14,24 +14,41 @@ struct SettingsView: View {
     @AppStorage("npm_password") var npmPassword: String = ""
     
     @EnvironmentObject var appService: AppService
+
+    @State private var connectivityStatus: InstanceConnectivityStatus?
+    @State private var isCheckingConnectivity = false
     
     var body: some View {
         NavigationStack {
             List {
                 Section(header: Text("")) {
-                    NavigationLink {
-                        InstanceView()
-                            .environmentObject(AppService.shared)
-                    } label: {
-                        VStack(alignment: .leading) {
-                            Text("INSTANCE")
-                            if !self.npmServerUrl.isEmpty {
-                                Text(self.npmServerUrl)
-                                    .foregroundStyle(.gray)
-                                    .font(.system(size: 14))
+                    HStack {
+                        NavigationLink {
+                            InstanceView()
+                                .environmentObject(AppService.shared)
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text("INSTANCE")
+                                if !self.npmServerUrl.isEmpty {
+                                    Text(self.npmServerUrl)
+                                        .foregroundStyle(.gray)
+                                        .font(.system(size: 14))
+                                    connectivityStatusView
+                                }
                             }
                         }
-                    }//Link
+
+                        if !self.npmServerUrl.isEmpty {
+                            Button {
+                                self.checkConnectivity()
+                            } label: {
+                                Image(systemName: "arrow.clockwise")
+                            }
+                            .accessibilityLabel(Text("RETRY"))
+                            .buttonStyle(.borderless)
+                            .disabled(self.isCheckingConnectivity)
+                        }
+                    }
                 }//Section
                 
                 Section {
@@ -79,7 +96,54 @@ struct SettingsView: View {
                 }//Section
             }//List
             .navigationTitle(Text("SETTINGS"))
+            .onAppear {
+                self.checkConnectivity()
+            }
         }//NavStack
+    }
+
+    @ViewBuilder
+    private var connectivityStatusView: some View {
+        HStack(spacing: 5) {
+            if self.isCheckingConnectivity {
+                ProgressView()
+                    .controlSize(.small)
+                Text("INSTANCE_CHECKING")
+            } else {
+                switch self.connectivityStatus {
+                case .connected:
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundStyle(.green)
+                    Text("INSTANCE_CONNECTED")
+                case .authenticationFailed:
+                    Image(systemName: "exclamationmark.circle.fill")
+                        .foregroundStyle(.red)
+                    Text("INSTANCE_AUTHENTICATION_FAILED")
+                case .serverUnavailable:
+                    Image(systemName: "exclamationmark.circle.fill")
+                        .foregroundStyle(.red)
+                    Text("INSTANCE_SERVER_UNAVAILABLE")
+                case nil:
+                    EmptyView()
+                }
+            }
+        }
+        .foregroundStyle(.secondary)
+        .font(.system(size: 14))
+    }
+
+    private func checkConnectivity() {
+        guard !self.npmServerUrl.isEmpty else {
+            self.connectivityStatus = nil
+            self.isCheckingConnectivity = false
+            return
+        }
+
+        self.isCheckingConnectivity = true
+        InstanceConnectivityRequest.check { status in
+            self.connectivityStatus = status
+            self.isCheckingConnectivity = false
+        }
     }
 }
 
