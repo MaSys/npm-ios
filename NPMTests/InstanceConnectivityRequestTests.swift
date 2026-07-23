@@ -36,4 +36,32 @@ final class InstanceConnectivityRequestTests: XCTestCase {
             .serverUnavailable
         )
     }
+
+    func testMissingStoredAuthenticationReturnsAuthenticationFailure() {
+        let defaults = UserDefaults(suiteName: #function)!
+        defaults.set("https://npm.example.com", forKey: "npm_server_url")
+
+        let expectation = expectation(description: "completion")
+        InstanceConnectivityRequest.check(userDefaults: defaults) { status in
+            XCTAssertEqual(status, .authenticationFailed)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testRequestUsesAuthenticatedCurrentUserEndpoint() throws {
+        let request = try XCTUnwrap(
+            InstanceConnectivityRequest.request(
+                baseURL: "https://npm.example.com",
+                token: "test-token"
+            )
+        )
+
+        XCTAssertEqual(request.url?.path, "/api/users/me")
+        XCTAssertEqual(
+            request.value(forHTTPHeaderField: "Authorization"),
+            "Bearer test-token"
+        )
+    }
 }
