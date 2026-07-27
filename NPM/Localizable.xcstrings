@@ -440,6 +440,47 @@
         }
       }
     },
+    "INSTANCE_AUTHENTICATION_FAILED_RETRY" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authentication failed · Tap to retry"
+          }
+        }
+      }
+    },
+    "INSTANCE_CHECKING" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Checking connection"
+          }
+        }
+      }
+    },
+    "INSTANCE_CONNECTED" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connected"
+          }
+        }
+      }
+    },
+    "INSTANCE_SERVER_UNAVAILABLE_RETRY" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server unavailable · Tap to retry"
+          }
+        }
+      }
+    },
     "INVALID_SERVER_URL" : {
       "localizations" : {
         "en" : {
