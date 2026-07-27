@@ -451,6 +451,7 @@
       }
     },
     "INSTANCE_CHECKING" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

@@ -28,18 +28,20 @@ struct SettingsView: View {
                             InstanceView()
                                 .environmentObject(AppService.shared)
                         } label: {
-                            VStack(alignment: .leading) {
-                                Text("INSTANCE")
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text("INSTANCE")
+                                    if !self.npmServerUrl.isEmpty {
+                                        Text(self.npmServerUrl)
+                                            .foregroundStyle(.gray)
+                                            .font(.system(size: 14))
+                                    }
+                                }
+                                Spacer()
                                 if !self.npmServerUrl.isEmpty {
-                                    Text(self.npmServerUrl)
-                                        .foregroundStyle(.gray)
-                                        .font(.system(size: 14))
+                                    connectivityStatusView
                                 }
                             }
-                        }
-
-                        if !self.npmServerUrl.isEmpty {
-                            connectivityStatusView
                         }
                     }
                 }//Section
@@ -101,7 +103,7 @@ struct SettingsView: View {
             if self.isCheckingConnectivity {
                 ProgressView()
                     .controlSize(.small)
-                Text("INSTANCE_CHECKING")
+//                Text("INSTANCE_CHECKING")
             } else {
                 switch self.connectivityStatus {
                 case .connected:
@@ -142,7 +144,7 @@ struct SettingsView: View {
         HStack(spacing: 5) {
             Image(systemName: icon)
                 .foregroundStyle(color)
-            Text(text)
+//            Text(text)
         }
     }
 
